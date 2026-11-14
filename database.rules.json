@@ -210,6 +210,27 @@
           }
         }
       }
+    },
+    "info": {
+      ".read": true,
+      "news": {
+        "$id": {
+          ".write": "auth != null && (root.child('fun/roles/' + auth.uid).val() === 'admin' || root.child('fun/roles/' + auth.uid).val() === 'mod')",
+          ".validate": "newData.hasChildren(['d', 'fr']) && newData.child('d').isNumber() && newData.child('fr').isString() && newData.child('fr').val().length >= 1 && newData.child('fr').val().length <= 500 && (!newData.child('en').exists() || (newData.child('en').isString() && newData.child('en').val().length <= 500)) && (!newData.child('l').exists() || (newData.child('l').isString() && newData.child('l').val().length <= 300 && (newData.child('l').val() === '' || newData.child('l').val().beginsWith('https://'))))",
+          "$other": {
+            ".validate": "$other === 'd' || $other === 'fr' || $other === 'en' || $other === 'l'"
+          }
+        }
+      },
+      "note": {
+        "$id": {
+          ".write": "auth != null && (root.child('fun/roles/' + auth.uid).val() === 'admin' || root.child('fun/roles/' + auth.uid).val() === 'mod') && $id.length <= 20",
+          ".validate": "newData.hasChildren(['fr', 't']) && newData.child('t').isNumber() && newData.child('fr').isString() && newData.child('fr').val().length <= 500 && (!newData.child('en').exists() || (newData.child('en').isString() && newData.child('en').val().length <= 500))",
+          "$other": {
+            ".validate": "$other === 'fr' || $other === 'en' || $other === 't'"
+          }
+        }
+      }
     }
   }
 }
