@@ -210,6 +210,17 @@ label.f{display:block;margin:10px 0 4px;font-weight:700;font-size:14px}
 .recs b{color:var(--gold);text-align:end;font-variant-numeric:tabular-nums}
 [dir=rtl] .flipx{transform:scaleX(-1)}
 @media (max-width:520px){#bar{gap:6px;padding-left:10px;padding-right:10px}#toHub span{display:none}#bar .btn.sm{padding:5px 8px}.chip{max-width:34vw;min-width:0}#bar h1{font-size:17px;letter-spacing:1px}.chip .tag{display:none}.btn{font-size:14px}.games{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.gcard{min-height:120px;padding:12px}.gcard .ic{font-size:32px}.stage{padding:10px}}
+.dbadge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#ff3b5c;color:#fff;font-size:12px;font-weight:900;vertical-align:middle}
+.xcard.hot{box-shadow:0 0 0 2px var(--gold),0 0 22px rgba(255,213,106,.35)}
+.dlist{display:flex;flex-direction:column;gap:6px;max-height:min(60vh,520px);overflow:auto}
+.drow{display:flex;align-items:center;gap:10px;padding:8px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.dwho{position:relative;flex:none;border:0;background:none;padding:0;cursor:pointer}
+.ddot{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:#777;border:2px solid var(--bg,#120a22)}.ddot.on{background:#2fd16b}
+.dtxt{flex:1;min-width:0;display:flex;flex-direction:column}.dtxt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dtxt small{color:var(--mut,#bba);line-height:1.35}
+.dact{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.dwho .av{width:38px;height:38px}
+.btn.warn{background:#c62828!important;color:#fff!important;border-color:#c62828!important}
+@media (max-width:480px){.drow:has(.dact .btn + .btn){flex-wrap:wrap}.drow:has(.dact .btn + .btn) .dact{width:100%}.drow:has(.dact .btn + .btn) .dact .btn{flex:1}}
 </style>
 <style id="gameCss">
 /* ---- blackjack ---- */
@@ -518,6 +529,9 @@ Object.assign(I18N.ar, {banTitle:"حسابك محظور من الموقع",banSu
 
 Object.assign(I18N.fr, {recordsAll:"Records (toutes semaines)",streakDay:"jour"});Object.assign(I18N.en, {recordsAll:"Records (all weeks)",streakDay:"day"});Object.assign(I18N.es, {recordsAll:"Récords (todas las semanas)",streakDay:"día"});
 Object.assign(I18N.tr, {recordsAll:"Rekorlar (tüm haftalar)",streakDay:"gün"});Object.assign(I18N.ko, {recordsAll:"기록 (전체 주)",streakDay:"일"});Object.assign(I18N.ar, {recordsAll:"الأرقام القياسية (كل الأسابيع)",streakDay:"يوم"});
+
+Object.assign(I18N.fr, {"myDuels": "Mes défis", "dSentHint": "Suis-le dans « Mes défis ».", "dCloseHint": "Fermer sans abandonner — tu pourras reprendre", "dLater": "Partie gardée : reprends-la dans « Mes défis »", "dSure": "Sûr ? Re-clique", "dAccepted": "{n} a accepté ton défi !", "dRefused2": "{n} a refusé ton défi", "dCancelled2": "{n} a annulé son défi", "dPlayed": "{n} a joué — c'est ton tour !", "dEndWon": "Tu as gagné contre {n} !", "dEndDraw": "Match nul contre {n}", "dEndLost": "{n} a gagné le défi", "dStExp": "expiré", "dStCan": "annulé", "dCancelled": "Défi annulé", "dOngoing": "Partie contre {n}", "dYourTurn": "C'est ton tour", "dResume": "Reprendre", "dSummary": "{a} invitation(s) · {b} en cours", "dOpen": "Voir l'historique de tes défis", "dNone": "Défie un joueur depuis son profil (clique sur son nom)", "dHint": "Les invitations restent valables 24 h. Sans coup joué pendant 24 h, celui qui doit jouer perd.", "dTabRecv": "Reçus", "dTabSent": "Envoyés", "dTabGames": "Parties", "dStInv": "en attente", "dStNo": "refusé", "dCancel": "Annuler", "dTheirTurn": "Tour de {n}", "dForfeit": "temps écoulé", "dNoRecv": "Aucune invitation reçue", "dNoSent": "Aucune invitation envoyée", "dNoGames": "Aucune partie pour l'instant"});Object.assign(I18N.en, {"myDuels": "My challenges", "dSentHint": "Follow it in “My challenges”.", "dCloseHint": "Close without giving up — you can resume", "dLater": "Game saved: resume it from “My challenges”", "dSure": "Sure? Tap again", "dAccepted": "{n} accepted your challenge!", "dRefused2": "{n} declined your challenge", "dCancelled2": "{n} cancelled their challenge", "dPlayed": "{n} played — your turn!", "dEndWon": "You beat {n}!", "dEndDraw": "Draw against {n}", "dEndLost": "{n} won the challenge", "dStExp": "expired", "dStCan": "cancelled", "dCancelled": "Challenge cancelled", "dOngoing": "Game vs {n}", "dYourTurn": "Your turn", "dResume": "Resume", "dSummary": "{a} invite(s) · {b} ongoing", "dOpen": "See your challenge history", "dNone": "Challenge a player from their profile (tap their name)", "dHint": "Invites stay valid for 24 h. With no move for 24 h, the player whose turn it is loses.", "dTabRecv": "Received", "dTabSent": "Sent", "dTabGames": "Games", "dStInv": "pending", "dStNo": "declined", "dCancel": "Cancel", "dTheirTurn": "{n}'s turn", "dForfeit": "time out", "dNoRecv": "No invites received", "dNoSent": "No invites sent", "dNoGames": "No games yet"});Object.assign(I18N.es, {"myDuels": "Mis desafíos", "dSentHint": "Síguelo en «Mis desafíos».", "dCloseHint": "Cerrar sin rendirse — podrás retomarla", "dLater": "Partida guardada: retómala en «Mis desafíos»", "dSure": "¿Seguro? Pulsa otra vez", "dAccepted": "¡{n} aceptó tu desafío!", "dRefused2": "{n} rechazó tu desafío", "dCancelled2": "{n} canceló su desafío", "dPlayed": "{n} ha jugado — ¡te toca!", "dEndWon": "¡Ganaste a {n}!", "dEndDraw": "Empate contra {n}", "dEndLost": "{n} ganó el desafío", "dStExp": "caducado", "dStCan": "cancelado", "dCancelled": "Desafío cancelado", "dOngoing": "Partida contra {n}", "dYourTurn": "Te toca", "dResume": "Retomar", "dSummary": "{a} invitación(es) · {b} en curso", "dOpen": "Ver el historial de tus desafíos", "dNone": "Desafía a un jugador desde su perfil (pulsa su nombre)", "dHint": "Las invitaciones valen 24 h. Sin jugada durante 24 h, pierde quien debía jugar.", "dTabRecv": "Recibidos", "dTabSent": "Enviados", "dTabGames": "Partidas", "dStInv": "pendiente", "dStNo": "rechazado", "dCancel": "Cancelar", "dTheirTurn": "Turno de {n}", "dForfeit": "tiempo agotado", "dNoRecv": "Ninguna invitación recibida", "dNoSent": "Ninguna invitación enviada", "dNoGames": "Aún no hay partidas"});Object.assign(I18N.tr, {"myDuels": "Meydan okumalarım", "dSentHint": "“Meydan okumalarım” bölümünden takip et.", "dCloseHint": "Pes etmeden kapat — sonra devam edebilirsin", "dLater": "Oyun kaydedildi: “Meydan okumalarım”dan devam et", "dSure": "Emin misin? Tekrar dokun", "dAccepted": "{n} meydan okumanı kabul etti!", "dRefused2": "{n} meydan okumanı reddetti", "dCancelled2": "{n} meydan okumasını iptal etti", "dPlayed": "{n} oynadı — sıra sende!", "dEndWon": "{n} oyuncusunu yendin!", "dEndDraw": "{n} ile berabere", "dEndLost": "{n} meydan okumayı kazandı", "dStExp": "süresi doldu", "dStCan": "iptal edildi", "dCancelled": "Meydan okuma iptal edildi", "dOngoing": "{n} ile oyun", "dYourTurn": "Sıra sende", "dResume": "Devam et", "dSummary": "{a} davet · {b} devam ediyor", "dOpen": "Meydan okuma geçmişini gör", "dNone": "Bir oyuncuya profilinden meydan oku (adına dokun)", "dHint": "Davetler 24 saat geçerlidir. 24 saat hamle yapılmazsa sırası gelen oyuncu kaybeder.", "dTabRecv": "Gelen", "dTabSent": "Gönderilen", "dTabGames": "Oyunlar", "dStInv": "bekliyor", "dStNo": "reddedildi", "dCancel": "İptal", "dTheirTurn": "Sıra {n} oyuncusunda", "dForfeit": "süre doldu", "dNoRecv": "Gelen davet yok", "dNoSent": "Gönderilen davet yok", "dNoGames": "Henüz oyun yok"});Object.assign(I18N.ko, {"myDuels": "내 도전", "dSentHint": "‘내 도전’에서 확인하세요.", "dCloseHint": "포기하지 않고 닫기 — 나중에 이어서 할 수 있어요", "dLater": "게임 저장됨: ‘내 도전’에서 이어하세요", "dSure": "정말요? 한 번 더 누르세요", "dAccepted": "{n}님이 도전을 수락했어요!", "dRefused2": "{n}님이 도전을 거절했어요", "dCancelled2": "{n}님이 도전을 취소했어요", "dPlayed": "{n}님이 두었어요 — 당신 차례!", "dEndWon": "{n}님에게 이겼어요!", "dEndDraw": "{n}님과 무승부", "dEndLost": "{n}님이 도전에서 이겼어요", "dStExp": "만료됨", "dStCan": "취소됨", "dCancelled": "도전 취소됨", "dOngoing": "{n}님과의 게임", "dYourTurn": "당신 차례", "dResume": "이어하기", "dSummary": "초대 {a} · 진행 중 {b}", "dOpen": "도전 기록 보기", "dNone": "플레이어 프로필에서 도전하세요 (이름을 누르세요)", "dHint": "초대는 24시간 유효해요. 24시간 동안 수를 두지 않으면 차례인 플레이어가 져요.", "dTabRecv": "받은 도전", "dTabSent": "보낸 도전", "dTabGames": "게임", "dStInv": "대기 중", "dStNo": "거절됨", "dCancel": "취소", "dTheirTurn": "{n}님 차례", "dForfeit": "시간 초과", "dNoRecv": "받은 초대 없음", "dNoSent": "보낸 초대 없음", "dNoGames": "아직 게임이 없어요"});Object.assign(I18N.ar, {"myDuels": "تحدياتي", "dSentHint": "تابعه في «تحدياتي».", "dCloseHint": "إغلاق دون استسلام — يمكنك المتابعة لاحقًا", "dLater": "تم حفظ اللعبة: تابعها من «تحدياتي»", "dSure": "متأكد؟ اضغط مرة أخرى", "dAccepted": "{n} قبل تحديك!", "dRefused2": "{n} رفض تحديك", "dCancelled2": "{n} ألغى تحديه", "dPlayed": "{n} لعب — دورك!", "dEndWon": "فزت على {n}!", "dEndDraw": "تعادل مع {n}", "dEndLost": "{n} فاز بالتحدي", "dStExp": "منتهي", "dStCan": "ملغى", "dCancelled": "تم إلغاء التحدي", "dOngoing": "مباراة ضد {n}", "dYourTurn": "دورك", "dResume": "متابعة", "dSummary": "{a} دعوة · {b} جارية", "dOpen": "عرض سجل تحدياتك", "dNone": "تحدَّ لاعبًا من ملفه الشخصي (اضغط على اسمه)", "dHint": "تبقى الدعوات صالحة 24 ساعة. إذا لم تُلعب أي حركة خلال 24 ساعة يخسر صاحب الدور.", "dTabRecv": "المستلمة", "dTabSent": "المرسلة", "dTabGames": "المباريات", "dStInv": "قيد الانتظار", "dStNo": "مرفوض", "dCancel": "إلغاء", "dTheirTurn": "دور {n}", "dForfeit": "انتهى الوقت", "dNoRecv": "لا توجد دعوات مستلمة", "dNoSent": "لا توجد دعوات مرسلة", "dNoGames": "لا توجد مباريات بعد"});
+Object.assign(I18N.fr, {dNewInv:"{n} te défie ! Réponds dans « Mes défis »"});Object.assign(I18N.en, {dNewInv:"{n} challenges you! Answer in “My challenges”"});Object.assign(I18N.es, {dNewInv:"¡{n} te desafía! Responde en «Mis desafíos»"});Object.assign(I18N.tr, {dNewInv:"{n} sana meydan okuyor! “Meydan okumalarım”dan yanıtla"});Object.assign(I18N.ko, {dNewInv:"{n}님이 도전했어요! ‘내 도전’에서 답하세요"});Object.assign(I18N.ar, {dNewInv:"{n} يتحداك! أجب في «تحدياتي»"});
 
 "use strict";
 const FB_CFG = {apiKey:"AIzaSyButTPJ74DlFm2Drdz2ROyxQAJO_ZnA-M8",authDomain:"rallysync-749b6.firebaseapp.com",databaseURL:"https://rallysync-749b6-default-rtdb.europe-west1.firebasedatabase.app",projectId:"rallysync-749b6",storageBucket:"rallysync-749b6.firebasestorage.app"};
@@ -1551,7 +1565,7 @@ async function publicCard(uid){
     <div class="achs">${ACHS.map(a => `<span class="ach ${ach[a.id] ? "on" : ""}" title="${esc(t("a_" + a.id))}">${a.ic}</span>`).join("")}</div>
     <hr style="border:0;border-top:1px solid var(--line);margin:12px 0"><b>🏆 ${t("top20")}</b><div class="recs">${ranks || `<span class="mut">${t("noScore")}</span>`}</div>
     <hr style="border:0;border-top:1px solid var(--line);margin:12px 0"><b>📈 ${t("recordsAll")}</b><div class="recs">${recs || `<span class="mut">${t("noScore")}</span>`}</div>
-    <div class="row end" style="margin-top:12px">${uid !== USER.uid && on ? `<button type="button" class="btn pri" id="pDuel">⚔️ ${t("duelBtn")}</button>` : ""}${isAdmin() ? `<button type="button" class="btn gold" id="pAdm">👑</button>` : ""}</div>`);
+    <div class="row end" style="margin-top:12px">${uid !== USER.uid ? `<button type="button" class="btn pri" id="pDuel">⚔️ ${t("duelBtn")}</button>` : ""}${isAdmin() ? `<button type="button" class="btn gold" id="pAdm">👑</button>` : ""}</div>`);
   $("#pX").onclick = closeModal;
   const d = $("#pDuel"); if (d) d.onclick = () => duelInvite(uid);
   const a = $("#pAdm"); if (a) a.onclick = async () => { if (!DASH.seen || !Object.keys(DASH.seen).length){ const g = p => FB.get(R(p)).then(s => s.val() || {}).catch(() => ({})); [DASH.seen, DASH.log] = await Promise.all([g("fun/seen"), g("fun/log")]); } playerCard(uid); };
@@ -1631,7 +1645,9 @@ function renderHomeExtras(){
   let html = `<div class="card xcard ${done ? "done" : ""}" id="dailyCard"><div class="row" style="justify-content:space-between"><b>🎯 ${t("dcTitle")}</b><span class="mut small">${done ? "✅ " + t("dcOk") : "+3 " + t("pts")}</span></div><div class="xbig">${GBY[d.g].ic} ${esc(t(d.k, d.n))}</div><div class="mut small">👥 ${who8} ${t("dcWho")}</div></div>`;
   html += `<div class="card xcard"><div class="row" style="justify-content:space-between"><b>🔥 ${t("streakTitle")}</b><button type="button" class="btn sm" id="installBtn2">📲 ${t("installTitle")}</button></div><div class="xbig">🔥 ${myStreak()} ${t(myStreak() === 1 ? "streakDay" : "streakDays")}</div><div class="mut small">${t("streakSub")}</div></div>`;
   if (TOUR && TOUR.e > now()) html += tourCard();
+  html = duelCard() + html;
   host.innerHTML = html;
+  const dc = $("#duelCard"); if (dc) dc.onclick = e => { const r = e.target.closest("[data-resume]"); if (r){ e.stopPropagation(); return watchDuel(r.dataset.resume); } openDuels(); };
   $("#dailyCard").onclick = () => openGame(d.g);
   $("#installBtn2").onclick = installApp;
   const tc = $("#tourCard"); if (tc) tc.onclick = openTour;
@@ -1645,6 +1661,8 @@ function extra2Start(u){
   unsubs.push(FB.onValue(R("fun/streak"), s => { STREAK = s.val() || {}; }, () => {}));
   unsubs.push(FB.onValue(R("fun/tour"), s => { TOUR = s.val(); tourListen(); if ($("#scrHome").classList.contains("on")) renderHomeExtras(); }, () => {}));
   unsubs.push(FB.onValue(R("fun/inbox/" + u.uid), s => { const old = INBOX; INBOX = s.val() || {}; Object.keys(INBOX).filter(k => !old[k]).forEach(k => duelInvited(k, INBOX[k])); }, () => {}));
+  unsubs.push(FB.onValue(R("fun/myd/" + u.uid), s => { MYD = s.val() || {}; duelSync(); }, () => {}));
+  unsubs.push(() => { for (const id in duelSubs) try { duelSubs[id](); } catch(e){} duelSubs = {}; DUELS = {}; MYD = {}; });
   setTimeout(() => { if (!USER || USER.uid !== u.uid) return; streakUpdate(); if (LASTWK){ const top = rankList(totals(LASTWK, WK - 1), "pts"); if (top[0] && top[0].uid === u.uid) unlock("champ"); } }, 1500);
 }
 function duelInvite(uid){
@@ -1653,18 +1671,23 @@ function duelInvite(uid){
   $("#dvX").onclick = closeModal;
   $("#mBody").querySelectorAll("[data-g]").forEach(b => b.onclick = async () => {
     const g = b.dataset.g, ref = FB.push(R("fun/duel")), id = ref.key, L = WORDLE_LANGS.includes(LANG) ? LANG : "en";
-    const data = {a: USER.uid, b: uid, g, st: "inv", t: TS(), ...(g === "c4" ? {mv: "", turn: USER.uid} : {L, wi: Math.floor(Math.random() * 1e6)})};
-    try { await FB.update(R(), {[`fun/duel/${id}`]: data, [`fun/inbox/${uid}/${id}`]: {from: USER.uid, g, t: TS()}}); closeModal(); toast("⚔️ " + t("duelSent"), 3500); watchDuel(id); }
+    const data = {a: USER.uid, b: uid, g, st: "inv", t: TS(), lm: TS(), ...(g === "c4" ? {mv: "", turn: USER.uid} : {L, wi: Math.floor(Math.random() * 1e6)})};
+    try { await FB.update(R(), {[`fun/duel/${id}`]: data, [`fun/inbox/${uid}/${id}`]: {from: USER.uid, g, t: TS()},
+        [`fun/myd/${USER.uid}/${id}`]: {o: uid, g, t: TS()}, [`fun/myd/${uid}/${id}`]: {o: USER.uid, g, t: TS()}});
+      closeModal(); toast("⚔️ " + t("duelSent") + " " + t("dSentHint"), 4500); }
     catch (e) { toast(t("errDb")); }
   });
 }
 function duelInvited(id, inv){
-  if (!inv || now() - (inv.t || 0) > 5 * 6e4) { FB.set(R(`fun/inbox/${USER.uid}/${id}`), null).catch(() => {}); return; }
+  if (!inv || now() - (inv.t || 0) > DUEL_INV_MS) { FB.set(R(`fun/inbox/${USER.uid}/${id}`), null).catch(() => {}); return; }
+  if (now() - (inv.t || 0) > 2 * 6e4) { duelBadge(); return; }
+  if ($("#modal").classList.contains("on") || curGame){   // busy: a short notice, the invite waits in "My challenges"
+    tone(660, .1, "triangle", .1); toast("⚔️ " + t("dNewInv").replace("{n}", (USERS[inv.from] || {}).n || "?"), 4500); duelBadge(); return; }   // seen later in "My challenges"
   const u = USERS[inv.from] || {};
   tone(660, .1, "triangle", .1); setTimeout(() => tone(880, .15, "triangle", .1), 140);
   openModal(`<h2>⚔️ ${t("duelInvTitle")}</h2><div class="hello" style="margin:8px 0">${avHtml(u.c, 'style="width:48px;height:48px"')}<b><span class="tag">[${esc(u.a)}]</span> ${esc(u.n)}</b></div><p>${esc(t("duelInvSub").replace("{g}", inv.g === "c4" ? t("g_c4") : t("duelWordle")))}</p><div class="row end"><button type="button" class="btn" id="dNo2">${t("duelNo")}</button><button type="button" class="btn go" id="dYes2">${t("duelYes")}</button></div>`, false);
-  $("#dNo2").onclick = async () => { closeModal(); FB.update(R(), {[`fun/duel/${id}/st`]: "no", [`fun/inbox/${USER.uid}/${id}`]: null}).catch(() => {}); };
-  $("#dYes2").onclick = async () => { closeModal(); try { await FB.update(R(), {[`fun/duel/${id}/st`]: "on", [`fun/inbox/${USER.uid}/${id}`]: null}); watchDuel(id); } catch (e) { toast(t("errDb")); } };
+  $("#dNo2").onclick = () => { closeModal(); duelAnswer(id, false); };
+  $("#dYes2").onclick = () => { closeModal(); duelAnswer(id, true); };
 }
 function watchDuel(id){
   if (duelUnsub) try { duelUnsub(); } catch(e){}
@@ -1672,7 +1695,7 @@ function watchDuel(id){
   duelUnsub = FB.onValue(R("fun/duel/" + id), s => {
     const d = s.val(); if (!d) return;
     DUEL = {id, ...d};
-    if (d.st === "no"){ toast("⚔️ " + t("duelRefused"), 3500); duelUnsub(); duelUnsub = null; return; }
+    if (d.st === "no" || d.st === "can" || d.st === "exp"){ duelUnsub(); duelUnsub = null; return; }
     if (d.st === "on" || d.st === "end"){ if (!shown){ shown = true; openDuel(); } else paintDuel(); }
   }, () => {});
 }
@@ -1682,16 +1705,19 @@ function c4Win(b, p){ for (let r = 0; r < C4R; r++) for (let c = 0; c < C4C; c++
 let DW = null;   // local state of the Wordle race
 function openDuel(){
   const d = DUEL, opp = d.a === USER.uid ? d.b : d.a, ou = USERS[opp] || {};
-  openModal(`<div class="row" style="justify-content:space-between"><h2>⚔️ ${d.g === "c4" ? t("g_c4") : t("duelWordle")}</h2><button type="button" class="btn sm" id="dwQuit">🏳️ ${t("duelQuit")}</button></div>
+  openModal(`<div class="row" style="justify-content:space-between"><h2>⚔️ ${d.g === "c4" ? t("g_c4") : t("duelWordle")}</h2><div class="row"><button type="button" class="btn sm" id="dwQuit">🏳️ ${t("duelQuit")}</button><button type="button" class="btn sm ghost" id="dwClose" title="${esc(t("dCloseHint"))}">✕</button></div></div>
     <div class="row" style="justify-content:space-between;margin-bottom:8px"><span>${who(USER.uid)}</span><b>VS</b><span>${who(opp)}</span></div><div class="mut small" id="dwMsg" style="text-align:center;min-height:20px;font-weight:800"></div><div id="dwBody" style="display:flex;flex-direction:column;align-items:center;gap:8px"></div>`, false);
-  $("#dwQuit").onclick = () => { if (DUEL.st === "end") return closeDuel(); duelEnd(opp, true); };
+  $("#dwClose").onclick = () => { closeDuel(); if (DUELS[d.id] && DUELS[d.id].st === "on") toast("⚔️ " + t("dLater"), 3500); };
+  $("#dwQuit").onclick = e => { if (DUEL.st === "end") return closeDuel();
+    const b = e.currentTarget; if (!b.dataset.sure){ b.dataset.sure = 1; b.textContent = "🏳️ " + t("dSure"); b.classList.add("warn"); setTimeout(() => { if (b.isConnected){ delete b.dataset.sure; b.textContent = "🏳️ " + t("duelQuit"); b.classList.remove("warn"); } }, 3500); return; }
+    duelEnd(opp, true); };
   if (d.g === "wordle") wordleRaceInit();
   paintDuel();
 }
-function closeDuel(){ if (duelUnsub) try { duelUnsub(); } catch(e){} duelUnsub = null; DUEL = null; DW = null; closeModal(); }
+function closeDuel(){ if (duelUnsub) try { duelUnsub(); } catch(e){} duelUnsub = null; DUEL = null; DW = null; closeModal(); duelRefresh(); }
 async function duelEnd(winner, quit){
   const d = DUEL; if (!d || d.st === "end") return;
-  const upd = {[`fun/duel/${d.id}/st`]: "end", [`fun/duel/${d.id}/w`]: winner || "draw"};
+  const upd = {[`fun/duel/${d.id}/st`]: "end", [`fun/duel/${d.id}/w`]: winner || "draw", [`fun/duel/${d.id}/lm`]: TS(), ...(quit ? {[`fun/duel/${d.id}/q`]: USER.uid} : {})};
   try { await FB.update(R(), upd); } catch (e) { console.warn(e); }
 }
 let duelPaid = {};
@@ -1706,7 +1732,7 @@ function paintDuel(){
     $("#dwBody").querySelectorAll("button").forEach(k => k.onclick = async () => {
       if (!myTurn) return; const col = +k.dataset.c; if (b[0][col]) return;
       const mv = (d.mv || "") + col, nb = c4Board(mv), win = c4Win(nb, myP), full = mv.length >= C4R * C4C;
-      const upd = {[`fun/duel/${d.id}/mv`]: mv, [`fun/duel/${d.id}/turn`]: iA ? d.b : d.a};
+      const upd = {[`fun/duel/${d.id}/mv`]: mv, [`fun/duel/${d.id}/turn`]: iA ? d.b : d.a, [`fun/duel/${d.id}/lm`]: TS()};
       if (win || full){ upd[`fun/duel/${d.id}/st`] = "end"; upd[`fun/duel/${d.id}/w`] = win ? me : "draw"; }
       tone(520, .06, "triangle", .06);
       try { await FB.update(R(), upd); } catch (e) { toast(t("errDb")); }
@@ -1723,7 +1749,9 @@ function paintDuel(){
 }
 const endText = d => d.w === "draw" ? "🤝 " + t("c4Draw") : d.w === USER.uid ? "🏆 " + t("duelWon") : "😿 " + t("duelLost");
 function wordleRaceInit(){
-  const d = DUEL; DW = {g: [], cur: [], done: false, t0: Date.now(), W: null};
+  const d = DUEL, me = USER.uid, gk = d.a === me ? "ga" : "gb", sk = d.a === me ? "sa" : "sb", rk = d.a === me ? "ra" : "rb";
+  DW = {g: d[gk] ? String(d[gk]).split(",").filter(Boolean) : [], cur: [], done: !!d[rk], t0: d[sk] || Date.now(), W: null};
+  if (!d[sk]) FB.update(R(), {[`fun/duel/${d.id}/${sk}`]: DW.t0}).catch(() => {});
   loadWords(d.L).then(W => { DW.W = W; DW.target = W.play[d.wi % W.play.length]; DW.ans = W.ans[d.wi % W.ans.length]; paintWordleRace(); }).catch(() => toast(t("wLoadFail")));
 }
 function paintWordleRace(){
@@ -1746,7 +1774,8 @@ async function wrKey(k){
   if (DW.cur.length < 5) return toast(t("wShort"));
   const g = DW.cur.join(""); if (!DW.W.ok.has(g)) return toast(t("wNotWord"));
   DW.g.push(g); DW.cur = [];
-  const ok = g === DW.target;
+  const ok = g === DW.target, gk = d.a === USER.uid ? "ga" : "gb";
+  FB.update(R(), {[`fun/duel/${d.id}/${gk}`]: DW.g.join(","), [`fun/duel/${d.id}/lm`]: TS()}).catch(() => {});
   if (ok || DW.g.length >= 6){
     DW.done = true;
     const me = USER.uid, myKey = d.a === me ? "ra" : "rb", opKey = d.a === me ? "rb" : "ra", mine = {ok, n: DW.g.length, ms: Date.now() - DW.t0};
@@ -1810,6 +1839,128 @@ function tourAdmin(host){
     try { await FB.set(R("fun/tour"), {id, name: $("#tName").value.trim().slice(0, 40) || t("tourTitle"), g: $("#tGame").value, s: s0, e: s0 + days * DAY, by: USER.uid}); toast(t("saved")); renderDash(); } catch (e) { toast(t("errDb")); }
   };
   const sp = $("#tStop"); if (sp) sp.onclick = async () => { try { await FB.update(R("fun/tour"), {e: now()}); toast(t("saved")); renderDash(); } catch (e) { toast(t("errDb")); } };
+}
+
+// ---------- my challenges: every duel I sent or received, followed live, with resume after a disconnection
+const DUEL_INV_MS = 864e5, DUEL_IDLE_MS = 864e5, DUEL_KEEP = 20;
+let MYD = {}, DUELS = {}, duelSubs = {}, duelTab = "recv";
+const dOpp = d => d.a === USER.uid ? d.b : d.a;
+const dName = uid => (USERS[uid] || {}).n || "?";
+const dOnline = uid => !!PUB[uid];
+function dAgo(ts){ const m = Math.max(0, Math.round((now() - (ts || 0)) / 6e4)); try { const f = new Intl.RelativeTimeFormat(LANG, {numeric: "auto", style: "short"}); return m < 60 ? f.format(-m, "minute") : m < 1440 ? f.format(-Math.round(m / 60), "hour") : f.format(-Math.round(m / 1440), "day"); } catch(e){ return m + " min"; } }
+function dState(d){   // what this duel is for me now
+  if (!d) return "gone";
+  if (d.st === "inv") return now() - (d.t || 0) > DUEL_INV_MS ? "exp" : (d.b === USER.uid ? "recv" : "sent");
+  if (d.st === "on") return "on";
+  return d.st;   // no / can / exp / end
+}
+const dMyTurn = d => d.st === "on" && (d.g === "c4" ? d.turn === USER.uid : !d[d.a === USER.uid ? "ra" : "rb"]);
+function duelSync(){
+  if (!USER) return;
+  // keep the list short: every duel still open + the 20 last finished ones
+  const ent = Object.entries(MYD).sort((a, b) => (b[1].t || 0) - (a[1].t || 0));
+  let fin = 0;
+  for (const [id] of ent){ const d = DUELS[id]; const done = d && ["end", "no", "can", "exp"].includes(d.st);
+    if (done && ++fin > DUEL_KEEP) FB.set(R(`fun/myd/${USER.uid}/${id}`), null).catch(() => {}); }
+  for (const [id] of ent) if (!duelSubs[id]) duelSubs[id] = FB.onValue(R("fun/duel/" + id), sn => duelChanged(id, sn.val()), () => {});
+  for (const id in duelSubs) if (!MYD[id]){ try { duelSubs[id](); } catch(e){} delete duelSubs[id]; delete DUELS[id]; }
+  duelRefresh();
+}
+function duelChanged(id, d){
+  const prev = DUELS[id]; DUELS[id] = d ? {id, ...d} : null;
+  if (!d){ duelRefresh(); return; }
+  const me = USER.uid, opp = dOpp(d), n = dName(opp), viewing = DUEL && DUEL.id === id && $("#dwBody");
+  if (prev){   // tell what just happened (not on the first load)
+    const ding = () => { tone(660, .1, "triangle", .1); setTimeout(() => tone(990, .15, "triangle", .1), 130); };
+    if (prev.st === "inv" && d.st === "on" && d.a === me){ ding(); toast("✅ " + t("dAccepted").replace("{n}", n), 4000); if (!DUEL && !curGame && (!$("#modal").classList.contains("on") || $("#dlList"))) watchDuel(id); }
+    else if (prev.st === "inv" && d.st === "no" && d.a === me){ toast("❌ " + t("dRefused2").replace("{n}", n), 4000); }
+    else if (prev.st === "inv" && d.st === "can" && d.b === me){ toast("🚫 " + t("dCancelled2").replace("{n}", n), 3500); }
+    else if (d.st === "on" && !viewing && d.g === "c4" && prev.turn !== me && d.turn === me){ ding(); toast("👉 " + t("dPlayed").replace("{n}", n), 4000); }
+    else if (prev.st === "on" && d.st === "end" && !viewing){ toast(d.w === me ? "🏆 " + t("dEndWon").replace("{n}", n) : d.w === "draw" ? "🤝 " + t("dEndDraw").replace("{n}", n) : "😿 " + t("dEndLost").replace("{n}", n), 4500); }
+  }
+  duelIdle(id, d);
+  duelRefresh();
+}
+function duelIdle(id, d){   // invitation older than 24 h = expired; no move for 24 h = the player who had to play loses
+  const age = now() - (d.lm || d.t || 0), me = USER.uid;
+  if (d.st === "inv" && now() - (d.t || 0) > DUEL_INV_MS){ const u = {[`fun/duel/${id}/st`]: "exp"}; if (d.b === me) u[`fun/inbox/${me}/${id}`] = null; FB.update(R(), u).catch(() => {}); return; }
+  if (d.st !== "on" || age <= DUEL_IDLE_MS) return;
+  let w;
+  if (d.g === "c4") w = d.turn === d.a ? d.b : d.a;
+  else w = d.ra && !d.rb ? d.a : d.rb && !d.ra ? d.b : "draw";
+  FB.update(R(), {[`fun/duel/${id}/st`]: "end", [`fun/duel/${id}/w`]: w, [`fun/duel/${id}/ff`]: 1, [`fun/duel/${id}/lm`]: TS()}).catch(() => {});
+}
+async function duelAnswer(id, yes){
+  const me = USER.uid, d = DUELS[id];
+  if (d && dState(d) !== "recv"){ toast("⚔️ " + t(dState(d) === "exp" ? "dStExp" : "dStCan")); FB.set(R(`fun/inbox/${me}/${id}`), null).catch(() => {}); return; }
+  try {
+    await FB.update(R(), {[`fun/duel/${id}/st`]: yes ? "on" : "no", [`fun/duel/${id}/lm`]: TS(), [`fun/inbox/${me}/${id}`]: null});
+    if (yes) watchDuel(id);
+  } catch (e) { toast(t("errDb")); }
+}
+async function duelCancel(id){
+  const d = DUELS[id]; if (!d || d.st !== "inv") return;
+  try { await FB.update(R(), {[`fun/duel/${id}/st`]: "can", [`fun/duel/${id}/lm`]: TS(), [`fun/inbox/${d.b}/${id}`]: null}); toast("🚫 " + t("dCancelled")); } catch (e) { toast(t("errDb")); }
+}
+function duelCounts(){
+  const c = {recv: 0, sent: 0, on: 0, turn: 0};
+  for (const id in DUELS){ const d = DUELS[id]; if (!d) continue; const st = dState(d);
+    if (st === "recv") c.recv++; else if (st === "sent") c.sent++; else if (st === "on"){ c.on++; if (dMyTurn(d)) c.turn++; } }
+  return c;
+}
+function duelBadge(){
+  const c = duelCounts(), n = c.recv + c.turn, b = $("#duelBadge");
+  if (b){ b.textContent = n; b.hidden = !n; }
+  return n;
+}
+function duelCard(){
+  if (!USER) return "";
+  const c = duelCounts(), on = Object.values(DUELS).filter(d => d && d.st === "on").sort((a, b) => (dMyTurn(b) - dMyTurn(a)) || ((b.lm || 0) - (a.lm || 0)));
+  const res = on.slice(0, 2).map(d => `<div class="row dres" style="justify-content:space-between;margin-top:6px"><span>${d.g === "c4" ? "🔴" : "🔤"} ${esc(t("dOngoing").replace("{n}", dName(dOpp(d))))}${dMyTurn(d) ? ` · <b style="color:var(--gold)">👉 ${esc(t("dYourTurn"))}</b>` : ""}</span><button type="button" class="btn sm pri" data-resume="${esc(d.id)}">▶ ${esc(t("dResume"))}</button></div>`).join("");
+  const n = c.recv + c.turn;
+  return `<div class="card xcard${n ? " hot" : ""}" id="duelCard" style="cursor:pointer"><div class="row" style="justify-content:space-between"><b>⚔️ ${t("myDuels")} <span class="dbadge" id="duelBadge"${n ? "" : " hidden"}>${n}</span></b><span class="mut small">${esc(t("dSummary").replace("{a}", c.recv + c.sent).replace("{b}", c.on))}</span></div>${res || `<div class="mut small" style="margin-top:6px">${esc(t(Object.keys(DUELS).length ? "dOpen" : "dNone"))}</div>`}</div>`;
+}
+function duelRefresh(){
+  duelBadge();
+  if ($("#scrHome") && $("#scrHome").classList.contains("on") && !$("#modal").classList.contains("on")) renderHomeExtras();
+  if ($("#dlList")) paintDuels();
+}
+function openDuels(tab){
+  const c = duelCounts();
+  duelTab = tab || (c.recv ? "recv" : c.on ? "games" : duelTab);
+  openModal(`<div class="row" style="justify-content:space-between"><h2>⚔️ ${t("myDuels")}</h2><button type="button" class="btn sm ghost" id="dlX">✕</button></div>
+    <div class="tabs" id="dlTabs"></div><p class="mut small" style="margin:6px 0">${esc(t("dHint"))}</p><div id="dlList" class="dlist"></div>`);
+  $("#dlX").onclick = () => { closeModal(); duelRefresh(); };
+  $("#dlTabs").onclick = e => { const b = e.target.closest("[data-t]"); if (b){ duelTab = b.dataset.t; paintDuels(); } };
+  $("#dlList").onclick = e => {
+    const b = e.target.closest("button[data-act]"); if (!b) return; const id = b.dataset.id, a = b.dataset.act;
+    if (a === "yes" || a === "no") return closeModal(), duelAnswer(id, a === "yes");
+    if (a === "can") return duelCancel(id);
+    if (a === "go") return watchDuel(id);
+    if (a === "prof") return publicCard(b.dataset.u);
+  };
+  paintDuels();
+}
+function paintDuels(){
+  const c = duelCounts(), tabs = [["recv", "📥 " + t("dTabRecv"), c.recv], ["sent", "📤 " + t("dTabSent"), c.sent], ["games", "🎮 " + t("dTabGames"), c.turn]];
+  $("#dlTabs").innerHTML = tabs.map(([k, l, n]) => `<button type="button" data-t="${k}" class="${duelTab === k ? "on" : ""}">${l}${n ? ` <span class="dbadge">${n}</span>` : ""}</button>`).join("");
+  const all = Object.values(DUELS).filter(Boolean).sort((a, b) => (b.lm || b.t || 0) - (a.lm || a.t || 0));
+  const pick = all.filter(d => { const st = dState(d);
+    if (duelTab === "recv") return d.b === USER.uid && st === "recv";
+    if (duelTab === "sent") return d.a === USER.uid && ["sent", "no", "can", "exp"].includes(st);
+    return st === "on" || st === "end"; });
+  const STL = {sent: "⏳ " + t("dStInv"), no: "❌ " + t("dStNo"), can: "🚫 " + t("dStCan"), exp: "⌛ " + t("dStExp")};
+  const row = d => {
+    const o = dOpp(d), st = dState(d), on = dOnline(o), gi = d.g === "c4" ? "🔴 " + t("g_c4") : "🔤 " + t("duelWordle");
+    let status = STL[st] || "", act = "";
+    if (st === "recv"){ status = "📥 " + t("duelInvTitle"); act = `<button type="button" class="btn sm" data-act="no" data-id="${esc(d.id)}">${t("duelNo")}</button><button type="button" class="btn sm go" data-act="yes" data-id="${esc(d.id)}">${t("duelYes")}</button>`; }
+    else if (st === "sent") act = `<button type="button" class="btn sm" data-act="can" data-id="${esc(d.id)}">🚫 ${t("dCancel")}</button>`;
+    else if (st === "on"){ status = dMyTurn(d) ? `<b style="color:var(--gold)">👉 ${esc(t("dYourTurn"))}</b>` : "⏳ " + esc(t("dTheirTurn").replace("{n}", dName(o))); act = `<button type="button" class="btn sm pri" data-act="go" data-id="${esc(d.id)}">▶ ${t("dResume")}</button>`; }
+    else if (st === "end"){ status = d.w === USER.uid ? "🏆 " + t("duelWon") : d.w === "draw" ? "🤝 " + t("c4Draw") : "😿 " + t("duelLost"); if (d.ff) status += ` <span class="mut">(${esc(t("dForfeit"))})</span>`; else if (d.q) status += ` <span class="mut">(🏳️ ${esc(dName(d.q))})</span>`; act = `<button type="button" class="btn sm ghost" data-act="go" data-id="${esc(d.id)}">👁</button>`; }
+    return `<div class="drow"><button type="button" class="dwho" data-act="prof" data-u="${esc(o)}">${avHtml((USERS[o] || {}).c)}<span class="ddot${on ? " on" : ""}" title="${esc(on ? t("onlineNow") : "")}"></span></button>
+      <div class="dtxt"><b><span class="tag">[${esc((USERS[o] || {}).a || "")}]</span> ${esc(dName(o))}</b><small>${gi} · ${status} · ${esc(dAgo(d.lm || d.t))}</small></div><div class="dact">${act}</div></div>`;
+  };
+  $("#dlList").innerHTML = pick.length ? pick.map(row).join("") : `<div class="mut" style="text-align:center;padding:18px">${esc(t(duelTab === "recv" ? "dNoRecv" : duelTab === "sent" ? "dNoSent" : "dNoGames"))}</div>`;
 }
 
 const GAME_IMPL = {};

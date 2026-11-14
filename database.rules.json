@@ -18,6 +18,12 @@
         ".write": "!newData.exists()"
       }
     },
+    "p": {
+      "$k": {
+        ".read": "$k.length === 64",
+        ".write": "$k.length === 64"
+      }
+    },
     "fun": {
       "u": {
         ".read": true,
@@ -171,7 +177,16 @@
         "$uid": {
           ".read": "auth != null && auth.uid === $uid",
           "$id": {
-            ".write": "auth != null && (auth.uid === $uid || (!data.exists() && newData.child('from').val() === auth.uid))"
+            ".write": "auth != null && (auth.uid === $uid || (!data.exists() && newData.child('from').val() === auth.uid) || (data.exists() && !newData.exists() && data.child('from').val() === auth.uid))"
+          }
+        }
+      },
+      "myd": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          "$id": {
+            ".write": "auth != null && (auth.uid === $uid || (!data.exists() && newData.child('o').val() === auth.uid))",
+            ".validate": "newData.child('o').isString() && newData.child('o').val().length <= 128 && (newData.child('g').val() === 'c4' || newData.child('g').val() === 'wordle')"
           }
         }
       },
@@ -194,12 +209,6 @@
             ".validate": "newData.child('v').isNumber() && newData.child('v').val() >= 0 && newData.child('v').val() <= 100000000 && newData.child('t').val() === now && (!data.exists() || newData.child('v').val() > data.child('v').val())"
           }
         }
-      }
-    },
-    "p": {
-      "$k": {
-        ".read": "$k.length === 64",
-        ".write": "$k.length === 64"
       }
     }
   }
