@@ -281,6 +281,10 @@ html.picking #sessions{display:flex}
 #ssNew{display:flex;gap:8px;padding:10px;border-radius:14px;background:linear-gradient(180deg,#b3121f,#7d0a14);box-shadow:0 0 0 3px #d4af37,0 12px 30px #0009}
 #ssName{flex:1;min-width:0;font-size:16px;padding:11px 12px;border-radius:10px;border:0;background:#1a0004;color:#ffe9a8;box-shadow:inset 0 0 0 2px #d4af37}
 #ssName::placeholder{color:#ffe9a873}
+#ssNew #ssLockT{flex:none;padding:10px 12px;color:#ffe9a8;background:#1a0004;box-shadow:inset 0 0 0 2px #d4af3788;font-size:18px}
+#ssNew #ssLockT.on{background:linear-gradient(180deg,#fff1a8,#f2c94c 45%,#c9971c);color:#2a1a00;box-shadow:0 3px 0 #7a5800}
+#ssLockHint{margin:6px 4px 0;font-size:12px;color:#ffe9a8;text-align:center;min-height:1em}
+.ss-row.locked{border-color:#d4af37aa;background:linear-gradient(90deg,#2a1d05,#0b2a1c 60%)}
 #ssNew button{font-size:16px;padding:10px 16px;border-radius:10px;border:0;font-weight:900;color:#2a1a00;background:linear-gradient(180deg,#fff1a8,#f2c94c 45%,#c9971c);box-shadow:0 3px 0 #7a5800}
 .ss-list{display:flex;flex-direction:column;gap:10px;margin-top:18px}
 .ss-row{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 8px;border-radius:14px;background:#0b2a1c;border:1px solid #d4af3755;box-shadow:0 6px 16px #0006}
@@ -911,7 +915,7 @@ html.kp-resizing,html.kp-resizing *{cursor:ew-resize!important;user-select:none!
     <h2>🎲 <span data-i="sessTitle"></span></h2>
     <div class="ss-sub" data-i="sessSub"></div>
     <div class="ss-mode" id="ssMode"></div>
-    <form id="ssNew" autocomplete="off"><input id="ssName" maxlength="40" enterkeyhint="go"><button type="submit" data-i="sessCreate"></button></form>
+    <form id="ssNew" autocomplete="off"><input id="ssName" maxlength="40" enterkeyhint="go"><button type="button" id="ssLockT" aria-pressed="false">🔓</button><button type="submit" data-i="sessCreate"></button></form>
     <div class="ss-list" id="ssList"></div>
   </div>
 </div>
@@ -1075,10 +1079,10 @@ const I18N = {
     renamePrompt:"Yeni isim:",imported:"İçe aktarıldı!",players:"oyuncu",rallyCustom:"Ralli süresi (örn. 2m30):",sync:"Senkron varış"}
 };
 /* ---------- texts of the Battle Roster link (KvK plan) ---------- */
-Object.assign(I18N.fr, {"bkBtn": "Sauvegardes", "bkTitle": "Sauvegardes", "bkIntro": "Pour remettre les données si elles sont effacées ou abîmées par erreur (sessions RallySync, cartes KvK PLAN, joueurs Battle Roster).", "bkNowT": "Maintenant dans la base", "bkDl": "Télécharger une sauvegarde", "bkFileT": "Remettre une sauvegarde", "bkUp": "Choisir un fichier de sauvegarde", "bkAutoT": "Copies automatiques sur cet appareil", "bkAutoP": "Une copie par jour est gardée dans ce navigateur (7 derniers jours). Elle est mise à jour chaque fois qu'un leader ouvre 752 ADMIN sur cet appareil, sauf si des données ont disparu.", "bkUse": "Remettre", "bkRestT": "Remettre cette sauvegarde", "bkRestP": "Les parties cochées vont remplacer ce qu'il y a maintenant. Par sécurité, l'état actuel est d'abord téléchargé.", "bkGo": "Remettre", "bkRestored": "Sauvegarde remise", "bkDone": "Sauvegarde téléchargée", "bkBad": "Ce fichier n'est pas une sauvegarde 752 HOME", "bkEmptyNow": "La base est vide", "bkSess": "sessions", "bkMaps": "cartes", "bkPlayers": "joueurs","admCode": "Code des leaders 752 (demandé une fois, puis retenu 30 jours sur cet appareil).", "admWrong": "Code incorrect", "hubAdmLock": "Verrouiller", "hubAdmUntil": "Déverrouillé sur cet appareil jusqu'au {d}", "admMoved": "Données transférées vers le nouvel espace sécurisé","hubAdminSub": "Rallyes, plan KvK et roster", "hubAdminTag": "Leaders 752", "hubFunTag": "Tout le serveur", "hubBack": "Retour", "hubLast": "Dernier utilisé", "hubAdminNote": "Chaque outil garde son propre code.", "hubUnlocked": "Déjà déverrouillé sur cet appareil","kpBrLvl": "Niveau", "kpBrAvail": "Dispo", "kpBrAvailL": "Disponibilité", "kpBrClr": "Effacer les filtres", "kpBrGrip": "Tire pour élargir · double-clic = taille de départ",kpOnMap:"Sur la map",kpBrLoading:"Connexion au Battle Roster…",kpBrErr:"Battle Roster injoignable pour le moment",kpBrEmpty:"Aucun joueur ici",kpBrPool:"Sans alliance",kpBrFree:"Non placés",kpBrAllTg:"Tous",kpBrArm:"Touche une case pour placer {n}",kpBrDrag:"Glisse un joueur sur la map, ou touche-le puis touche une case. ✓ = sur la map · ☑ = coché à la main.",kpBrMove:"{n} est déjà placé ({k}). Le déplacer ici ?",kpBrReplace:"Cette case contient déjà {n}. Le remplacer ?",kpBrRemove:"Retirer de la map",kpBrDone:"Sur la map",kpBrManual:"Cocher / décocher à la main",kpBrEdit:"Modifier le joueur",kpBrSaved:"Enregistré dans le Battle Roster",kpBrSum:"Résumé",kpBrStarFree:"Joueurs étoilés pas encore placés",kpBrByTg:"Placés par niveau",kpBrMiss:"Sur la map mais absent du Battle Roster (supprimé ou pseudo différent)",kpBrWrong:"Clan de la case différent de l'alliance du Battle Roster",kpBrOpen:"Ouvrir le Battle Roster",kpBrNone:"Aucune",kpBrPseudo:"Pseudo",kpBrAlly:"Alliance",kpBrStar:"Étoile",kpBrGold:"Jaune",kpBrRed:"Rouge",kpBrBlue:"Bleue",kpBrCity:"Case",kpBrRow:"Ligne",kpBrCol:"Col.",kpBrGone:"Ce joueur vient d'être modifié ou supprimé dans le Battle Roster, réessaie",kpBrCancel:"Annuler",kpBrSaveBtn:"Enregistrer"});
-Object.assign(I18N.en, {"bkBtn": "Backups", "bkTitle": "Backups", "bkIntro": "To put the data back if it is erased or damaged by mistake (RallySync sessions, KvK PLAN maps, Battle Roster players).", "bkNowT": "In the database now", "bkDl": "Download a backup", "bkFileT": "Restore a backup", "bkUp": "Choose a backup file", "bkAutoT": "Automatic copies on this device", "bkAutoP": "One copy per day is kept in this browser (last 7 days), each time a leader opens 752 ADMIN.", "bkUse": "Restore", "bkRestT": "Restore this backup", "bkRestP": "The ticked parts will replace what is there now. To be safe, the current state is downloaded first.", "bkGo": "Restore", "bkRestored": "Backup restored", "bkDone": "Backup downloaded", "bkBad": "This file is not a 752 HOME backup", "bkEmptyNow": "The database is empty", "bkSess": "sessions", "bkMaps": "maps", "bkPlayers": "players","admCode": "Code for the 752 leaders (asked once, then remembered 30 days on this device).", "admWrong": "Wrong code", "hubAdmLock": "Lock", "hubAdmUntil": "Unlocked on this device until {d}", "admMoved": "Data moved to the new secure place","hubAdminSub": "Rally timing, KvK plan and roster", "hubAdminTag": "752 leaders", "hubFunTag": "Whole server", "hubBack": "Back", "hubLast": "Last used", "hubAdminNote": "Each tool keeps its own code.", "hubUnlocked": "Already unlocked on this device","kpBrLvl": "Level", "kpBrAvail": "Avail.", "kpBrAvailL": "Availability", "kpBrClr": "Clear filters", "kpBrGrip": "Drag to widen · double-click = default size",kpOnMap:"On the map",kpBrLoading:"Connecting to Battle Roster…",kpBrErr:"Battle Roster can't be reached right now",kpBrEmpty:"No players here",kpBrPool:"No alliance",kpBrFree:"Not placed",kpBrAllTg:"All",kpBrArm:"Tap a city to place {n}",kpBrDrag:"Drag a player onto the map, or tap them then tap a city. ✓ = on the map · ☑ = ticked by hand.",kpBrMove:"{n} is already placed ({k}). Move here?",kpBrReplace:"This city already holds {n}. Replace?",kpBrRemove:"Remove from the map",kpBrDone:"On the map",kpBrManual:"Tick / untick by hand",kpBrEdit:"Edit player",kpBrSaved:"Saved in Battle Roster",kpBrSum:"Summary",kpBrStarFree:"Starred players not placed yet",kpBrByTg:"Placed by level",kpBrMiss:"On the map but not in Battle Roster (deleted or different name)",kpBrWrong:"City clan differs from the Battle Roster alliance",kpBrOpen:"Open Battle Roster",kpBrNone:"None",kpBrPseudo:"Name",kpBrAlly:"Alliance",kpBrStar:"Star",kpBrGold:"Yellow",kpBrRed:"Red",kpBrBlue:"Blue",kpBrCity:"City",kpBrRow:"Row",kpBrCol:"Col.",kpBrGone:"This player was just changed or deleted in Battle Roster, try again",kpBrCancel:"Cancel",kpBrSaveBtn:"Save"});
-Object.assign(I18N.ko, {"bkBtn": "백업", "bkTitle": "백업", "bkIntro": "데이터가 실수로 지워지거나 손상되었을 때 되돌리기 위한 기능입니다 (RallySync 세션, KvK PLAN 지도, 배틀 로스터 플레이어).", "bkNowT": "현재 데이터베이스", "bkDl": "백업 다운로드", "bkFileT": "백업 복원", "bkUp": "백업 파일 선택", "bkAutoT": "이 기기의 자동 사본", "bkAutoP": "리더가 752 ADMIN을 열 때마다 하루에 한 개의 사본이 이 브라우저에 보관됩니다 (최근 7일).", "bkUse": "복원", "bkRestT": "이 백업 복원", "bkRestP": "선택한 부분이 현재 내용을 대체합니다. 안전을 위해 현재 상태를 먼저 다운로드합니다.", "bkGo": "복원", "bkRestored": "백업이 복원되었습니다", "bkDone": "백업이 다운로드되었습니다", "bkBad": "752 HOME 백업 파일이 아닙니다", "bkEmptyNow": "데이터베이스가 비어 있습니다", "bkSess": "세션", "bkMaps": "지도", "bkPlayers": "플레이어","admCode": "752 리더 코드 (한 번 입력하면 이 기기에서 30일 동안 기억됩니다).", "admWrong": "코드가 틀렸습니다", "hubAdmLock": "잠그기", "hubAdmUntil": "이 기기에서 {d}까지 잠금 해제됨", "admMoved": "데이터를 새 보안 공간으로 옮겼습니다","hubAdminSub": "집결 타이밍, KvK 계획, 로스터", "hubAdminTag": "752 리더 전용", "hubFunTag": "서버 전체", "hubBack": "뒤로", "hubLast": "최근 사용", "hubAdminNote": "각 도구는 자체 코드가 있습니다.", "hubUnlocked": "이 기기에서 이미 잠금 해제됨","kpBrLvl": "레벨", "kpBrAvail": "참여", "kpBrAvailL": "참여 시간", "kpBrClr": "필터 지우기", "kpBrGrip": "끌어서 넓히기 · 더블클릭 = 기본 크기",kpOnMap:"맵 위",kpBrLoading:"배틀 로스터 연결 중…",kpBrErr:"지금은 배틀 로스터에 연결할 수 없습니다",kpBrEmpty:"플레이어 없음",kpBrPool:"연맹 없음",kpBrFree:"미배치",kpBrAllTg:"전체",kpBrArm:"{n}을(를) 놓을 칸을 누르세요",kpBrDrag:"플레이어를 맵으로 끌어다 놓거나, 누른 뒤 칸을 누르세요. ✓ = 맵 위 · ☑ = 직접 체크.",kpBrMove:"{n}은(는) 이미 배치됨 ({k}). 여기로 옮길까요?",kpBrReplace:"이 칸에 이미 {n}이(가) 있습니다. 바꿀까요?",kpBrRemove:"맵에서 빼기",kpBrDone:"맵 위",kpBrManual:"직접 체크 / 해제",kpBrEdit:"플레이어 수정",kpBrSaved:"배틀 로스터에 저장됨",kpBrSum:"요약",kpBrStarFree:"아직 배치되지 않은 별표 플레이어",kpBrByTg:"레벨별 배치",kpBrMiss:"맵에는 있지만 배틀 로스터에 없음 (삭제 또는 다른 이름)",kpBrWrong:"칸의 클랜이 배틀 로스터 연맹과 다름",kpBrOpen:"배틀 로스터 열기",kpBrNone:"없음",kpBrPseudo:"닉네임",kpBrAlly:"연맹",kpBrStar:"별",kpBrGold:"노랑",kpBrRed:"빨강",kpBrBlue:"파랑",kpBrCity:"칸",kpBrRow:"행",kpBrCol:"열",kpBrGone:"이 플레이어가 배틀 로스터에서 방금 수정 또는 삭제되었습니다. 다시 시도하세요",kpBrCancel:"취소",kpBrSaveBtn:"저장"});
-Object.assign(I18N.tr, {"bkBtn": "Yedekler", "bkTitle": "Yedekler", "bkIntro": "Veriler yanlışlıkla silinir veya bozulursa geri koymak için (RallySync oturumları, KvK PLAN haritaları, Battle Roster oyuncuları).", "bkNowT": "Şu an veritabanında", "bkDl": "Yedek indir", "bkFileT": "Yedeği geri yükle", "bkUp": "Yedek dosyası seç", "bkAutoT": "Bu cihazdaki otomatik kopyalar", "bkAutoP": "Bir lider 752 ADMIN'i her açtığında bu tarayıcıda günde bir kopya tutulur (son 7 gün).", "bkUse": "Geri yükle", "bkRestT": "Bu yedeği geri yükle", "bkRestP": "İşaretli kısımlar şu ankilerin yerine geçer. Güvenlik için önce mevcut durum indirilir.", "bkGo": "Geri yükle", "bkRestored": "Yedek geri yüklendi", "bkDone": "Yedek indirildi", "bkBad": "Bu dosya bir 752 HOME yedeği değil", "bkEmptyNow": "Veritabanı boş", "bkSess": "oturum", "bkMaps": "harita", "bkPlayers": "oyuncu","admCode": "752 liderleri kodu (bir kez sorulur, sonra bu cihazda 30 gün hatırlanır).", "admWrong": "Yanlış kod", "hubAdmLock": "Kilitle", "hubAdmUntil": "Bu cihazda {d} tarihine kadar açık", "admMoved": "Veriler yeni güvenli alana taşındı","hubAdminSub": "Ralli zamanlaması, KvK planı ve kadro", "hubAdminTag": "752 liderleri", "hubFunTag": "Tüm sunucu", "hubBack": "Geri", "hubLast": "Son kullanılan", "hubAdminNote": "Her aracın kendi kodu vardır.", "hubUnlocked": "Bu cihazda zaten açık","kpBrLvl": "Seviye", "kpBrAvail": "Katılım", "kpBrAvailL": "Katılım", "kpBrClr": "Filtreleri temizle", "kpBrGrip": "Genişletmek için sürükle · çift tık = varsayılan boyut",kpOnMap:"Haritada",kpBrLoading:"Battle Roster'a bağlanılıyor…",kpBrErr:"Battle Roster'a şu an ulaşılamıyor",kpBrEmpty:"Burada oyuncu yok",kpBrPool:"İttifaksız",kpBrFree:"Yerleşmemiş",kpBrAllTg:"Tümü",kpBrArm:"{n} için bir şehre dokun",kpBrDrag:"Bir oyuncuyu haritaya sürükle ya da ona dokunup bir şehre dokun. ✓ = haritada · ☑ = elle işaretli.",kpBrMove:"{n} zaten yerleşik ({k}). Buraya taşınsın mı?",kpBrReplace:"Bu şehirde zaten {n} var. Değiştirilsin mi?",kpBrRemove:"Haritadan kaldır",kpBrDone:"Haritada",kpBrManual:"Elle işaretle / kaldır",kpBrEdit:"Oyuncuyu düzenle",kpBrSaved:"Battle Roster'a kaydedildi",kpBrSum:"Özet",kpBrStarFree:"Henüz yerleşmemiş yıldızlı oyuncular",kpBrByTg:"Seviyeye göre yerleşenler",kpBrMiss:"Haritada ama Battle Roster'da yok (silinmiş veya farklı ad)",kpBrWrong:"Şehrin klanı Battle Roster ittifakından farklı",kpBrOpen:"Battle Roster'ı aç",kpBrNone:"Yok",kpBrPseudo:"Ad",kpBrAlly:"İttifak",kpBrStar:"Yıldız",kpBrGold:"Sarı",kpBrRed:"Kırmızı",kpBrBlue:"Mavi",kpBrCity:"Şehir",kpBrRow:"Satır",kpBrCol:"Süt.",kpBrGone:"Bu oyuncu Battle Roster'da az önce değişti veya silindi, tekrar dene",kpBrCancel:"İptal",kpBrSaveBtn:"Kaydet"});
+Object.assign(I18N.fr, {"sessLockOnT": "La nouvelle session sera protégée par un code", "sessLockOffT": "Protéger la nouvelle session par un code", "sessCodeNew": "Code de la session (au moins 4 caractères). Seuls ceux qui le connaissent pourront l'ouvrir.", "sessCodeAgain": "Tape le code encore une fois", "sessCodeShort": "Code trop court (4 caractères minimum)", "sessCodeMismatch": "Les deux codes sont différents", "sessCodeAsk": "Cette session est protégée. Tape son code :", "sessCodeWrong": "Code incorrect", "sessLocked": "Protégée", "sessLock": "Protéger par un code", "sessUnlock": "Retirer le code", "sessUnlockQ": "Retirer le code de cette session ? Tous les leaders pourront l'ouvrir.", "sessLockedOk": "Session protégée", "sessUnlockedOk": "Code retiré", "superOn": "Super admin","bkBtn": "Sauvegardes", "bkTitle": "Sauvegardes", "bkIntro": "Pour remettre les données si elles sont effacées ou abîmées par erreur (sessions RallySync, cartes KvK PLAN, joueurs Battle Roster).", "bkNowT": "Maintenant dans la base", "bkDl": "Télécharger une sauvegarde", "bkFileT": "Remettre une sauvegarde", "bkUp": "Choisir un fichier de sauvegarde", "bkAutoT": "Copies automatiques sur cet appareil", "bkAutoP": "Une copie par jour est gardée dans ce navigateur (7 derniers jours). Elle est mise à jour chaque fois qu'un leader ouvre 752 ADMIN sur cet appareil, sauf si des données ont disparu.", "bkUse": "Remettre", "bkRestT": "Remettre cette sauvegarde", "bkRestP": "Les parties cochées vont remplacer ce qu'il y a maintenant. Par sécurité, l'état actuel est d'abord téléchargé.", "bkGo": "Remettre", "bkRestored": "Sauvegarde remise", "bkDone": "Sauvegarde téléchargée", "bkBad": "Ce fichier n'est pas une sauvegarde 752 HOME", "bkEmptyNow": "La base est vide", "bkSess": "sessions", "bkMaps": "cartes", "bkPlayers": "joueurs","admCode": "Code des leaders 752 (demandé une fois, puis retenu 30 jours sur cet appareil).", "admWrong": "Code incorrect", "hubAdmLock": "Verrouiller", "hubAdmUntil": "Déverrouillé sur cet appareil jusqu'au {d}", "admMoved": "Données transférées vers le nouvel espace sécurisé","hubAdminSub": "Rallyes, plan KvK et roster", "hubAdminTag": "Leaders 752", "hubFunTag": "Tout le serveur", "hubBack": "Retour", "hubLast": "Dernier utilisé", "hubAdminNote": "Chaque outil garde son propre code.", "hubUnlocked": "Déjà déverrouillé sur cet appareil","kpBrLvl": "Niveau", "kpBrAvail": "Dispo", "kpBrAvailL": "Disponibilité", "kpBrClr": "Effacer les filtres", "kpBrGrip": "Tire pour élargir · double-clic = taille de départ",kpOnMap:"Sur la map",kpBrLoading:"Connexion au Battle Roster…",kpBrErr:"Battle Roster injoignable pour le moment",kpBrEmpty:"Aucun joueur ici",kpBrPool:"Sans alliance",kpBrFree:"Non placés",kpBrAllTg:"Tous",kpBrArm:"Touche une case pour placer {n}",kpBrDrag:"Glisse un joueur sur la map, ou touche-le puis touche une case. ✓ = sur la map · ☑ = coché à la main.",kpBrMove:"{n} est déjà placé ({k}). Le déplacer ici ?",kpBrReplace:"Cette case contient déjà {n}. Le remplacer ?",kpBrRemove:"Retirer de la map",kpBrDone:"Sur la map",kpBrManual:"Cocher / décocher à la main",kpBrEdit:"Modifier le joueur",kpBrSaved:"Enregistré dans le Battle Roster",kpBrSum:"Résumé",kpBrStarFree:"Joueurs étoilés pas encore placés",kpBrByTg:"Placés par niveau",kpBrMiss:"Sur la map mais absent du Battle Roster (supprimé ou pseudo différent)",kpBrWrong:"Clan de la case différent de l'alliance du Battle Roster",kpBrOpen:"Ouvrir le Battle Roster",kpBrNone:"Aucune",kpBrPseudo:"Pseudo",kpBrAlly:"Alliance",kpBrStar:"Étoile",kpBrGold:"Jaune",kpBrRed:"Rouge",kpBrBlue:"Bleue",kpBrCity:"Case",kpBrRow:"Ligne",kpBrCol:"Col.",kpBrGone:"Ce joueur vient d'être modifié ou supprimé dans le Battle Roster, réessaie",kpBrCancel:"Annuler",kpBrSaveBtn:"Enregistrer"});
+Object.assign(I18N.en, {"sessLockOnT": "The new session will be protected by a code", "sessLockOffT": "Protect the new session with a code", "sessCodeNew": "Session code (at least 4 characters). Only people who know it can open it.", "sessCodeAgain": "Type the code again", "sessCodeShort": "Code too short (4 characters minimum)", "sessCodeMismatch": "The two codes are different", "sessCodeAsk": "This session is protected. Type its code:", "sessCodeWrong": "Wrong code", "sessLocked": "Protected", "sessLock": "Protect with a code", "sessUnlock": "Remove the code", "sessUnlockQ": "Remove the code of this session? Every leader will be able to open it.", "sessLockedOk": "Session protected", "sessUnlockedOk": "Code removed", "superOn": "Super admin","bkBtn": "Backups", "bkTitle": "Backups", "bkIntro": "To put the data back if it is erased or damaged by mistake (RallySync sessions, KvK PLAN maps, Battle Roster players).", "bkNowT": "In the database now", "bkDl": "Download a backup", "bkFileT": "Restore a backup", "bkUp": "Choose a backup file", "bkAutoT": "Automatic copies on this device", "bkAutoP": "One copy per day is kept in this browser (last 7 days), each time a leader opens 752 ADMIN.", "bkUse": "Restore", "bkRestT": "Restore this backup", "bkRestP": "The ticked parts will replace what is there now. To be safe, the current state is downloaded first.", "bkGo": "Restore", "bkRestored": "Backup restored", "bkDone": "Backup downloaded", "bkBad": "This file is not a 752 HOME backup", "bkEmptyNow": "The database is empty", "bkSess": "sessions", "bkMaps": "maps", "bkPlayers": "players","admCode": "Code for the 752 leaders (asked once, then remembered 30 days on this device).", "admWrong": "Wrong code", "hubAdmLock": "Lock", "hubAdmUntil": "Unlocked on this device until {d}", "admMoved": "Data moved to the new secure place","hubAdminSub": "Rally timing, KvK plan and roster", "hubAdminTag": "752 leaders", "hubFunTag": "Whole server", "hubBack": "Back", "hubLast": "Last used", "hubAdminNote": "Each tool keeps its own code.", "hubUnlocked": "Already unlocked on this device","kpBrLvl": "Level", "kpBrAvail": "Avail.", "kpBrAvailL": "Availability", "kpBrClr": "Clear filters", "kpBrGrip": "Drag to widen · double-click = default size",kpOnMap:"On the map",kpBrLoading:"Connecting to Battle Roster…",kpBrErr:"Battle Roster can't be reached right now",kpBrEmpty:"No players here",kpBrPool:"No alliance",kpBrFree:"Not placed",kpBrAllTg:"All",kpBrArm:"Tap a city to place {n}",kpBrDrag:"Drag a player onto the map, or tap them then tap a city. ✓ = on the map · ☑ = ticked by hand.",kpBrMove:"{n} is already placed ({k}). Move here?",kpBrReplace:"This city already holds {n}. Replace?",kpBrRemove:"Remove from the map",kpBrDone:"On the map",kpBrManual:"Tick / untick by hand",kpBrEdit:"Edit player",kpBrSaved:"Saved in Battle Roster",kpBrSum:"Summary",kpBrStarFree:"Starred players not placed yet",kpBrByTg:"Placed by level",kpBrMiss:"On the map but not in Battle Roster (deleted or different name)",kpBrWrong:"City clan differs from the Battle Roster alliance",kpBrOpen:"Open Battle Roster",kpBrNone:"None",kpBrPseudo:"Name",kpBrAlly:"Alliance",kpBrStar:"Star",kpBrGold:"Yellow",kpBrRed:"Red",kpBrBlue:"Blue",kpBrCity:"City",kpBrRow:"Row",kpBrCol:"Col.",kpBrGone:"This player was just changed or deleted in Battle Roster, try again",kpBrCancel:"Cancel",kpBrSaveBtn:"Save"});
+Object.assign(I18N.ko, {"sessLockOnT": "새 세션은 코드로 보호됩니다", "sessLockOffT": "새 세션을 코드로 보호", "sessCodeNew": "세션 코드 (4자 이상). 코드를 아는 사람만 열 수 있습니다.", "sessCodeAgain": "코드를 한 번 더 입력하세요", "sessCodeShort": "코드가 너무 짧습니다 (최소 4자)", "sessCodeMismatch": "두 코드가 다릅니다", "sessCodeAsk": "보호된 세션입니다. 코드를 입력하세요:", "sessCodeWrong": "코드가 틀렸습니다", "sessLocked": "보호됨", "sessLock": "코드로 보호", "sessUnlock": "코드 제거", "sessUnlockQ": "이 세션의 코드를 제거할까요? 모든 리더가 열 수 있게 됩니다.", "sessLockedOk": "세션이 보호되었습니다", "sessUnlockedOk": "코드가 제거되었습니다", "superOn": "슈퍼 관리자","bkBtn": "백업", "bkTitle": "백업", "bkIntro": "데이터가 실수로 지워지거나 손상되었을 때 되돌리기 위한 기능입니다 (RallySync 세션, KvK PLAN 지도, 배틀 로스터 플레이어).", "bkNowT": "현재 데이터베이스", "bkDl": "백업 다운로드", "bkFileT": "백업 복원", "bkUp": "백업 파일 선택", "bkAutoT": "이 기기의 자동 사본", "bkAutoP": "리더가 752 ADMIN을 열 때마다 하루에 한 개의 사본이 이 브라우저에 보관됩니다 (최근 7일).", "bkUse": "복원", "bkRestT": "이 백업 복원", "bkRestP": "선택한 부분이 현재 내용을 대체합니다. 안전을 위해 현재 상태를 먼저 다운로드합니다.", "bkGo": "복원", "bkRestored": "백업이 복원되었습니다", "bkDone": "백업이 다운로드되었습니다", "bkBad": "752 HOME 백업 파일이 아닙니다", "bkEmptyNow": "데이터베이스가 비어 있습니다", "bkSess": "세션", "bkMaps": "지도", "bkPlayers": "플레이어","admCode": "752 리더 코드 (한 번 입력하면 이 기기에서 30일 동안 기억됩니다).", "admWrong": "코드가 틀렸습니다", "hubAdmLock": "잠그기", "hubAdmUntil": "이 기기에서 {d}까지 잠금 해제됨", "admMoved": "데이터를 새 보안 공간으로 옮겼습니다","hubAdminSub": "집결 타이밍, KvK 계획, 로스터", "hubAdminTag": "752 리더 전용", "hubFunTag": "서버 전체", "hubBack": "뒤로", "hubLast": "최근 사용", "hubAdminNote": "각 도구는 자체 코드가 있습니다.", "hubUnlocked": "이 기기에서 이미 잠금 해제됨","kpBrLvl": "레벨", "kpBrAvail": "참여", "kpBrAvailL": "참여 시간", "kpBrClr": "필터 지우기", "kpBrGrip": "끌어서 넓히기 · 더블클릭 = 기본 크기",kpOnMap:"맵 위",kpBrLoading:"배틀 로스터 연결 중…",kpBrErr:"지금은 배틀 로스터에 연결할 수 없습니다",kpBrEmpty:"플레이어 없음",kpBrPool:"연맹 없음",kpBrFree:"미배치",kpBrAllTg:"전체",kpBrArm:"{n}을(를) 놓을 칸을 누르세요",kpBrDrag:"플레이어를 맵으로 끌어다 놓거나, 누른 뒤 칸을 누르세요. ✓ = 맵 위 · ☑ = 직접 체크.",kpBrMove:"{n}은(는) 이미 배치됨 ({k}). 여기로 옮길까요?",kpBrReplace:"이 칸에 이미 {n}이(가) 있습니다. 바꿀까요?",kpBrRemove:"맵에서 빼기",kpBrDone:"맵 위",kpBrManual:"직접 체크 / 해제",kpBrEdit:"플레이어 수정",kpBrSaved:"배틀 로스터에 저장됨",kpBrSum:"요약",kpBrStarFree:"아직 배치되지 않은 별표 플레이어",kpBrByTg:"레벨별 배치",kpBrMiss:"맵에는 있지만 배틀 로스터에 없음 (삭제 또는 다른 이름)",kpBrWrong:"칸의 클랜이 배틀 로스터 연맹과 다름",kpBrOpen:"배틀 로스터 열기",kpBrNone:"없음",kpBrPseudo:"닉네임",kpBrAlly:"연맹",kpBrStar:"별",kpBrGold:"노랑",kpBrRed:"빨강",kpBrBlue:"파랑",kpBrCity:"칸",kpBrRow:"행",kpBrCol:"열",kpBrGone:"이 플레이어가 배틀 로스터에서 방금 수정 또는 삭제되었습니다. 다시 시도하세요",kpBrCancel:"취소",kpBrSaveBtn:"저장"});
+Object.assign(I18N.tr, {"sessLockOnT": "Yeni oturum bir kodla korunacak", "sessLockOffT": "Yeni oturumu bir kodla koru", "sessCodeNew": "Oturum kodu (en az 4 karakter). Sadece kodu bilenler açabilir.", "sessCodeAgain": "Kodu bir kez daha yaz", "sessCodeShort": "Kod çok kısa (en az 4 karakter)", "sessCodeMismatch": "İki kod farklı", "sessCodeAsk": "Bu oturum korumalı. Kodunu yaz:", "sessCodeWrong": "Yanlış kod", "sessLocked": "Korumalı", "sessLock": "Kodla koru", "sessUnlock": "Kodu kaldır", "sessUnlockQ": "Bu oturumun kodu kaldırılsın mı? Tüm liderler açabilecek.", "sessLockedOk": "Oturum korundu", "sessUnlockedOk": "Kod kaldırıldı", "superOn": "Süper yönetici","bkBtn": "Yedekler", "bkTitle": "Yedekler", "bkIntro": "Veriler yanlışlıkla silinir veya bozulursa geri koymak için (RallySync oturumları, KvK PLAN haritaları, Battle Roster oyuncuları).", "bkNowT": "Şu an veritabanında", "bkDl": "Yedek indir", "bkFileT": "Yedeği geri yükle", "bkUp": "Yedek dosyası seç", "bkAutoT": "Bu cihazdaki otomatik kopyalar", "bkAutoP": "Bir lider 752 ADMIN'i her açtığında bu tarayıcıda günde bir kopya tutulur (son 7 gün).", "bkUse": "Geri yükle", "bkRestT": "Bu yedeği geri yükle", "bkRestP": "İşaretli kısımlar şu ankilerin yerine geçer. Güvenlik için önce mevcut durum indirilir.", "bkGo": "Geri yükle", "bkRestored": "Yedek geri yüklendi", "bkDone": "Yedek indirildi", "bkBad": "Bu dosya bir 752 HOME yedeği değil", "bkEmptyNow": "Veritabanı boş", "bkSess": "oturum", "bkMaps": "harita", "bkPlayers": "oyuncu","admCode": "752 liderleri kodu (bir kez sorulur, sonra bu cihazda 30 gün hatırlanır).", "admWrong": "Yanlış kod", "hubAdmLock": "Kilitle", "hubAdmUntil": "Bu cihazda {d} tarihine kadar açık", "admMoved": "Veriler yeni güvenli alana taşındı","hubAdminSub": "Ralli zamanlaması, KvK planı ve kadro", "hubAdminTag": "752 liderleri", "hubFunTag": "Tüm sunucu", "hubBack": "Geri", "hubLast": "Son kullanılan", "hubAdminNote": "Her aracın kendi kodu vardır.", "hubUnlocked": "Bu cihazda zaten açık","kpBrLvl": "Seviye", "kpBrAvail": "Katılım", "kpBrAvailL": "Katılım", "kpBrClr": "Filtreleri temizle", "kpBrGrip": "Genişletmek için sürükle · çift tık = varsayılan boyut",kpOnMap:"Haritada",kpBrLoading:"Battle Roster'a bağlanılıyor…",kpBrErr:"Battle Roster'a şu an ulaşılamıyor",kpBrEmpty:"Burada oyuncu yok",kpBrPool:"İttifaksız",kpBrFree:"Yerleşmemiş",kpBrAllTg:"Tümü",kpBrArm:"{n} için bir şehre dokun",kpBrDrag:"Bir oyuncuyu haritaya sürükle ya da ona dokunup bir şehre dokun. ✓ = haritada · ☑ = elle işaretli.",kpBrMove:"{n} zaten yerleşik ({k}). Buraya taşınsın mı?",kpBrReplace:"Bu şehirde zaten {n} var. Değiştirilsin mi?",kpBrRemove:"Haritadan kaldır",kpBrDone:"Haritada",kpBrManual:"Elle işaretle / kaldır",kpBrEdit:"Oyuncuyu düzenle",kpBrSaved:"Battle Roster'a kaydedildi",kpBrSum:"Özet",kpBrStarFree:"Henüz yerleşmemiş yıldızlı oyuncular",kpBrByTg:"Seviyeye göre yerleşenler",kpBrMiss:"Haritada ama Battle Roster'da yok (silinmiş veya farklı ad)",kpBrWrong:"Şehrin klanı Battle Roster ittifakından farklı",kpBrOpen:"Battle Roster'ı aç",kpBrNone:"Yok",kpBrPseudo:"Ad",kpBrAlly:"İttifak",kpBrStar:"Yıldız",kpBrGold:"Sarı",kpBrRed:"Kırmızı",kpBrBlue:"Mavi",kpBrCity:"Şehir",kpBrRow:"Satır",kpBrCol:"Süt.",kpBrGone:"Bu oyuncu Battle Roster'da az önce değişti veya silindi, tekrar dene",kpBrCancel:"İptal",kpBrSaveBtn:"Kaydet"});
 const COLORS = ["#f5b83d","#4aa3ff","#ff6b6b","#2ecc71","#b57bff","#ff9f43","#1dd1a1","#ff6bcb","#a3cb38","#48dbfb"];
 const KEY = "rallysync.v1", PREFS_KEY = "rallysync.prefs", LAYOUT_KEY = "rallysync.layout.";
 /* =====================================================================================
@@ -1886,7 +1890,8 @@ function LocalStore(){
     remove(id){ const d = read(); delete d.meta[id]; delete d.sessions[id]; put(d); },
     open(id, cb){ let last; const f = ()=>{ const v = read().sessions[id] ?? null, j = JSON.stringify(v); if(j !== last){ last = j; cb(v); } }; subs.add(f); f(); return ()=>subs.delete(f); },
     write(id, upd){ const d = read(); if(!d.sessions[id]) return; for(const k in upd) setPath(d.sessions[id], k, clean(upd[k])); if(d.meta[id]) d.meta[id].updated = Date.now(); put(d); },
-    join(){ return ()=>{}; }
+    join(){ return ()=>{}; },
+    async exists(){ return false; }
   };
 }
 
@@ -1905,18 +1910,90 @@ async function FirebaseStore(cfg){
   await new Promise((res, rej)=>{ const timer = setTimeout(()=>rej(new Error("timeout")), 9000);
     const off = D.onValue(D.ref(db, ".info/connected"), sn=>{ if(sn.val()){ clearTimeout(timer); setTimeout(()=>off(), 0); res(); } }, e=>{ clearTimeout(timer); rej(e); }); });
   st.listSessions = cb => D.onValue(R("meta"), sn=>cb(sn.val() || {}), fail);
+  const PK = id=>{ const m = metaCache[id]; return m && m.lock ? "p/" + skGet(id) : ""; };   // protected place, if any
+  const once = path=>new Promise(res=>{ let off = null, done = false; off = D.onValue(D.ref(db, path), sn=>{ if(done) return; done = true; setTimeout(()=>off && off(), 0); res(sn.val()); }, ()=>{ if(!done){ done = true; res(null); } }); });
+  st.exists = async path=>(await once(path)) != null;
+  st.lockSess = async (id, code)=>{   // add a code to an existing session (its data moves to the protected place)
+    const k = await sessKeyOf(id, code), ek = await sealForSuper(k), data = await once(`${ROOT}/sessions/${id}`);
+    await D.update(D.ref(db), {[`p/${k}/s`]:data, [`${ROOT}/meta/${id}/lock`]:1, [`${ROOT}/meta/${id}/ek`]:ek, [`${ROOT}/meta/${id}/updated`]:TS(), [`${ROOT}/sessions/${id}`]:null, [`${ROOT}/presence/${id}`]:null});
+    skSet(id, k); };
+  st.unlockSess = async id=>{   // remove the code (the data goes back to the normal place)
+    const k = skGet(id); if(!k) return; const data = await once(`p/${k}/s`);
+    await D.update(D.ref(db), {[`${ROOT}/sessions/${id}`]:data, [`${ROOT}/meta/${id}/lock`]:null, [`${ROOT}/meta/${id}/ek`]:null, [`${ROOT}/meta/${id}/updated`]:TS(), [`p/${k}`]:null});
+    skDel(id); };
   st.presence = cb => D.onValue(R("presence"), sn=>cb(sn.val() || {}), ()=>{});
-  st.create = async (name, data)=>{ const id = D.push(R("meta")).key;
+  st.create = async (name, data, code)=>{ const id = D.push(R("meta")).key;
+    if(code){ const k = await sessKeyOf(id, code), ek = await sealForSuper(k);
+      await D.update(D.ref(db), {[`${ROOT}/meta/${id}`]:{name, created:TS(), updated:TS(), lock:1, ek}, [`p/${k}/s`]:clean(data)}); skSet(id, k); return id; }
     await D.update(R(), {[`meta/${id}`]:{name, created:TS(), updated:TS()}, [`sessions/${id}`]:clean(data)}); return id; };
   st.rename = (id, name)=>D.update(R(), {[`meta/${id}/name`]:name, [`meta/${id}/updated`]:TS()}).catch(fail);
-  st.remove = id=>D.update(R(), {[`meta/${id}`]:null, [`sessions/${id}`]:null, [`presence/${id}`]:null}).catch(fail);
-  st.open = (id, cb)=>D.onValue(R(`sessions/${id}`), sn=>cb(sn.val()), fail);
-  st.write = (id, upd)=>{ const u = {}; for(const k in upd) u[`sessions/${id}/${k}`] = upd[k]; u[`meta/${id}/updated`] = TS(); return D.update(R(), u).catch(fail); };
-  st.join = id=>{ const me = D.push(R(`presence/${id}`)); D.onDisconnect(me).remove(); D.set(me, TS()); return ()=>{ D.remove(me); }; };
+  st.remove = id=>{ const pk = PK(id); const u = {[`${ROOT}/meta/${id}`]:null, [`${ROOT}/sessions/${id}`]:null, [`${ROOT}/presence/${id}`]:null}; if(pk && pk !== "p/") u[pk] = null;
+    return D.update(D.ref(db), u).then(()=>skDel(id)).catch(fail); };
+  st.open = (id, cb)=>{ const pk = PK(id); return D.onValue(pk ? D.ref(db, pk + "/s") : R(`sessions/${id}`), sn=>cb(sn.val()), fail); };
+  st.write = (id, upd)=>{ const pk = PK(id), base = pk ? pk + "/s" : `${ROOT}/sessions/${id}`, u = {};
+    for(const k in upd) u[`${base}/${k}`] = upd[k]; u[`${ROOT}/meta/${id}/updated`] = TS(); return D.update(D.ref(db), u).catch(fail); };
+  st.join = id=>{ const pk = PK(id), me = D.push(pk ? D.ref(db, pk + "/pr") : R(`presence/${id}`)); D.onDisconnect(me).remove(); D.set(me, TS()); return ()=>{ D.remove(me); }; };
   st.raw = { TS, on:(path, cb, err)=>D.onValue(D.ref(db, path), sn=>cb(sn.val()), err), update:map=>D.update(D.ref(db), map) };
   return st;
 }
 
+/* ---------- RallySync: sessions protected by their own code ----------
+   A protected session lives at p/<key>/ in the database, where <key> comes from the session code (PBKDF2, salted with the session id):
+   a leader without that code cannot read or change it. The key is also kept in the session list, sealed for the super admin
+   (RSA public key below); only the super admin code can open the matching private key, so the super admin opens every session. */
+const SUPER_PUB = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoyfUCEfdebvJKGwuhZNTCKCnAsrXTwWklu+peXYo7PWeFHKN4ls3hH9BD4KEhCkocqjuD3AavgjkRn6otWbK0XsbQOJAXfCtV3z8VLZn2s6eFi4iB/BOCdOE6cNJiqOzz9US+sBDpnQ00kG94r6rIESZCLd8CK5hb6t59WlM8WM9Lf5OIBKb3BFmScxZ7hPqB5KfHVV+YzXSR9IqWsJPr48R+m4rSa9px7iS97jPkRSmwQJ9bOvahcYWSZ7iY2TYLDiaHNZHXwO7iCDQgyW9F+PHhMBcVClUGUTP1nwTIFu5YyT35Z/aW5hjlPmAavLaP4P5iTWek1iRAmRbVPkQ1QIDAQAB";
+const SUPER_PRIV = "LMvhddahS8kgdoowakuKjJkkMtXgbgNgKrSbyyQobeFUQvEdiPd6BAsSVc8bHApN5bAxMjxBBFLJVx/sCkN4BdflIiZzm2QIxZLJvHBPaDBF3WRR5p8P67pVbzWoOoS6ZC1FFxSqFFFaeDZwhgSMiIj5w6H8KDWqSTmqZ9aZe3Z5UqEFpO0OoVH8WvZ+H8lOEmgPpRAmRuU+PUYYmXJs0J28rwYN7Zt8DEUx80jWfVBpBu7Rz3CE3p2sGn93AKsNuZVqgikBaL1HlgVeZ7mwT0TsYZWTLRHbWT5M706BZMIJ8W6pxuofuzQKW/tvngghrPLOWLHW9Vqc/At5hd3tP54yB0gvgs55ejUY8s3Q4JXiEYr3/6xGLwPyAtiZTYfdV7JHBu3ceLnCWWsRG/tT2DpzxMvhK5cjZghAxKLSYDkB8pF/ONADojdLyr4fKLyJ++CxhXek/Ct5A+wnbGBkOnTEXxHmuE2mSlm8qXTd9csn2PnOE5ymYNg0XILan8cLFi9fc9XoyjsuuNOScuchNZGlEmLYAtco7xD6fi1SUeze02wNdCxWgq4z/Jn/G2jZqIUFP6eumJTwoe5vPft7oLUDG1dAsYMYKQ9dXod6tVBZGi34LC31D84tq2ILphJ3amfk4Vlv2ANXvlInP35g7tKj9Jro8RxRxsB+6b6HUabpyX2Df6DX7Ln4glCKAbNwkxTcDieKv9d9dEo7CDO4IQXbBPdSUTaPlazRzyivnOxSfQd25e+TQF8oukqiSJCnb27m/1QJMFWWWl17ziE3xWuqRUa35hVxxiqkk2GWgxRo4/rjX6URjtplUzd1QuPXQpo02RFLvbTo366KNrhyoZmtw4tAeF4Y0u1eayzs3ouQAJanJdEZXRYuVyImppqN7zWdjilDPZs2nH04OHvyK1okBYq24DsDQ1nA3MShF4m/U8hmFv5SJMeANaAaUxxr9pPuojg0vq62a+6tJSxEcaiXn+gBQ9p9pnTaKMaelbNgGt/wEluSvFEcA2k0cnbaLDfBj5xDVp1tXDStGje4KuqPdWRXU+PFGmB8P15HvD+aTQc1b6XEsvsxSxs4fmMe/Fi8A9lEBslfFRxXk+oUHfZWo1OKqs3RfAPR0658VVVAkiIdPaTwah0i6hgOn004GWOeKWrLffLb+b8PNnyDj66BR0QvxssuHmmdCX3LgrxasJPVTj2YBQVdb7nlniq8hKcUWfJpnOC+01HU55ND05ta4k9qYN48Knd9d5sYOuLyl8iJKdcsOj24w/UQIU68BXMeOvRcuY+W0NRKQrVbXogtgSVVd082m8TWQlCQGYdxfuqLZvLAyptsR+3mbDwUg4SbaBAiVC32pXXEHNKci/Vp/f1pV82OU/dflQzE18Sl4RJUjKRdnzKEmhMokDYML2amadvk/Zc4XK9dzMpUAyMnwV+/oR5a6ZVtuO/u8VP1oeayRYxM6/a9MqDeQIgcQqKtPYufJxqwjeIIkhnBAz1IKtJ9Mr9MxDJDIgzfg2ifYhi+UTXql6+7gp4B8JCNwx+rc5nCOAGpBV6pNF6q3CEuXb8UvYTA/D45AhbdtxmB8Fn4L7elNQVGSUIz35Mn+Oerje9lwJk/q5rioHmJe3lOkOpLtejKq5UjNIpzkWzTNwMUQhpslAW74Gz6";   // the private key, encrypted with the super admin code (AES-GCM, PBKDF2 600 000)
+const b64d = s=>Uint8Array.from(atob(s), c=>c.charCodeAt(0)), b64e = a=>{ let s = ""; new Uint8Array(a).forEach(x=>s += String.fromCharCode(x)); return btoa(s); };
+const SK_KEY = "rallysync.sk", SUP_KEY = "rallysync.super", SK_DAYS = 30;
+let skMem = {}, supMem = null;
+function skAll(){ try{ return JSON.parse(localStorage.getItem(SK_KEY) || "{}") || {}; }catch(e){ return {}; } }
+function skGet(id){ const x = Object.assign({}, skMem, skAll())[id]; return x && x.until > Date.now() && /^[0-9a-f]{64}$/.test(x.k) ? x.k : ""; }
+function skSet(id, k){ skMem[id] = {k, until:Date.now() + SK_DAYS * 864e5}; const a = skAll(); a[id] = skMem[id]; sSet(localStorage, SK_KEY, JSON.stringify(a)); }
+function skDel(id){ delete skMem[id]; const a = skAll(); delete a[id]; sSet(localStorage, SK_KEY, JSON.stringify(a)); }
+async function supKey(){   // the super admin private key, when unlocked on this device
+  if(supMem) return supMem;
+  let j = null; try{ j = JSON.parse(localStorage.getItem(SUP_KEY) || "null"); }catch(e){}
+  if(j && j.until > Date.now() && j.jwk){ try{ supMem = await crypto.subtle.importKey("jwk", j.jwk, {name:"RSA-OAEP", hash:"SHA-256"}, false, ["decrypt"]); }catch(e){} }
+  return supMem;
+}
+const supOn = ()=>{ if(supMem) return true; try{ const j = JSON.parse(localStorage.getItem(SUP_KEY) || "null"); return !!(j && j.until > Date.now()); }catch(e){ return false; } };
+async function supUnlock(code){   // true when the code is the super admin code
+  try{
+    const E = new TextEncoder(), C = crypto.subtle;
+    const k = await C.importKey("raw", E.encode(norm752(code)), "PBKDF2", false, ["deriveKey"]);
+    const aes = await C.deriveKey({name:"PBKDF2", salt:E.encode("752home|super"), iterations:600000, hash:"SHA-256"}, k, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+    const raw = b64d(SUPER_PRIV), pk8 = await C.decrypt({name:"AES-GCM", iv:raw.slice(0, 12)}, aes, raw.slice(12));
+    const priv = await C.importKey("pkcs8", pk8, {name:"RSA-OAEP", hash:"SHA-256"}, true, ["decrypt"]), jwk = await C.exportKey("jwk", priv);
+    supMem = await C.importKey("jwk", jwk, {name:"RSA-OAEP", hash:"SHA-256"}, false, ["decrypt"]);
+    sSet(localStorage, SUP_KEY, JSON.stringify({jwk, until:Date.now() + ADM_DAYS * 864e5})); return true;
+  }catch(e){ return false; }
+}
+async function supOpen(m){ const p = await supKey(); if(!p || !m || !m.ek) return ""; try{ const k = new TextDecoder().decode(await crypto.subtle.decrypt({name:"RSA-OAEP"}, p, b64d(m.ek))); return /^[0-9a-f]{64}$/.test(k) ? k : ""; }catch(e){ return ""; } }
+async function sealForSuper(k){ const pub = await crypto.subtle.importKey("spki", b64d(SUPER_PUB), {name:"RSA-OAEP", hash:"SHA-256"}, false, ["encrypt"]); return b64e(await crypto.subtle.encrypt({name:"RSA-OAEP"}, pub, new TextEncoder().encode(k))); }
+const sessKeyOf = async (id, code)=>(await derive752("sess|" + id, code)).key;
+async function sessKey(id){   // key of a protected session: remembered, super admin, or asked
+  const m = metaCache[id]; if(!m || !m.lock) return "";
+  let k = skGet(id); if(k) return k;
+  k = await supOpen(m); if(k){ skSet(id, k); return k; }
+  let wrong = false;
+  for(;;){
+    const v = await ask(`🔒 ${m.name}\n\n${wrong ? "❌ " + t("sessCodeWrong") + "\n\n" : ""}${t("sessCodeAsk")}`, "", "password");
+    if(v == null || !norm752(v)) return null;
+    toast("⏳");
+    let kk = ""; try{ kk = await sessKeyOf(id, v); }catch(e){ toast("⚠️ " + (e && e.message || e)); return null; }
+    if(await STORE.exists(`p/${kk}/s`)){ skSet(id, kk); return kk; }
+    if(await supUnlock(v)){ const k2 = await supOpen(m); toast("👑 " + t("superOn")); if(k2){ skSet(id, k2); return k2; } }
+    wrong = true;
+  }
+}
+async function askNewCode(){
+  const a = await ask(t("sessCodeNew"), "", "password"); if(a == null) return null;
+  if(norm752(a).length < 4){ toast("⚠️ " + t("sessCodeShort")); return null; }
+  const b = await ask(t("sessCodeAgain"), "", "password"); if(b == null) return null;
+  if(norm752(a) !== norm752(b)){ toast("⚠️ " + t("sessCodeMismatch")); return null; }
+  return a;
+}
+let ssLockOn = false;
 const ssList = document.getElementById("ssList"), ssName = document.getElementById("ssName");
 const storeReady = (async ()=>{
   await 0;   // let the rest of this script finish defining things first
@@ -1953,14 +2030,19 @@ function ago(ts){
 const onlineCount = id => Object.keys(presenceCache[id] || {}).length;
 function renderSessions(){
   ssName.placeholder = t("sessNamePh");
+  const lt = document.getElementById("ssLockT"); if(lt){ lt.hidden = !(STORE && STORE.mode === "online"); lt.classList.toggle("on", ssLockOn); lt.textContent = ssLockOn ? "🔒" : "🔓"; lt.title = t(ssLockOn ? "sessLockOnT" : "sessLockOffT"); lt.setAttribute("aria-pressed", ssLockOn); }
+  let hint = document.getElementById("ssLockHint"); if(!hint){ hint = document.createElement("p"); hint.id = "ssLockHint"; document.getElementById("ssNew").after(hint); }
+  hint.textContent = ssLockOn ? "🔒 " + t("sessLockOnT") : "";
   const mode = document.getElementById("ssMode");
   if(STORE){ mode.textContent = t(STORE.mode === "online" ? "modeOnline" : STORE.mode === "fail" ? "modeFail" : "modeLocal");
     mode.className = "ss-mode " + (STORE.mode === "online" ? "on" : STORE.mode === "fail" ? "warn" : ""); }
   const list = Object.entries(metaCache).filter(([,m])=>m && m.name).sort((a,b)=>(b[1].updated||0) - (a[1].updated||0));
   ssList.innerHTML = list.length ? list.map(([id,m])=>{ const n = onlineCount(id);
-    return `<div class="ss-row" data-sid="${esc(id)}">
-      <button type="button" class="ss-open" data-open="${esc(id)}"><span class="ss-chip">🎲</span><span class="ss-txt"><b>${esc(m.name)}</b>
-        <small>${n ? `<span class="ss-live"></span>${n} ${esc(t("sessOnlineN"))} · ` : ""}${esc(t("sessUpdated"))} ${esc(ago(m.updated))}</small></span></button>
+    const lk = !!m.lock, own = lk && !!skGet(id);
+    return `<div class="ss-row${lk ? " locked" : ""}" data-sid="${esc(id)}">
+      <button type="button" class="ss-open" data-open="${esc(id)}"><span class="ss-chip">${lk ? (own || supOn() ? "🔓" : "🔒") : "🎲"}</span><span class="ss-txt"><b>${esc(m.name)}</b>
+        <small>${lk ? `🔒 ${esc(t("sessLocked"))} · ` : ""}${n ? `<span class="ss-live"></span>${n} ${esc(t("sessOnlineN"))} · ` : ""}${esc(t("sessUpdated"))} ${esc(ago(m.updated))}</small></span></button>
+      ${STORE && STORE.mode === "online" ? `<button type="button" class="icon" data-lock="${esc(id)}" title="${esc(t(lk ? "sessUnlock" : "sessLock"))}">${lk ? "🔓" : "🔒"}</button>` : ""}
       ${STORE && STORE.mode === "online" ? `<button type="button" class="icon" data-link="${esc(id)}" title="Link">🔗</button>` : ""}
       <button type="button" class="icon" data-ren="${esc(id)}" title="${esc(t("rename"))}">✎</button>
       <button type="button" class="icon" data-del="${esc(id)}" title="${esc(t("del"))}">🗑</button></div>`; }).join("")
@@ -1994,6 +2076,8 @@ function showSessions(){
 }
 async function openSession(id){
   await storeReady;
+  for(let i = 0; i < 30 && !metaCache[id]; i++) await new Promise(r=>setTimeout(r, 100));   // a link opened before the list arrived
+  if(metaCache[id] && metaCache[id].lock){ const k = await sessKey(id); if(!k){ if(!SESSION) showSessions(); return; } }
   if(KP.isActive()) KP.close();   // e.g. a session link opened while the plan is on screen
   leaveSession();
   const m = metaCache[id];
@@ -2012,8 +2096,11 @@ async function openSession(id){
 async function createSession(name){
   await storeReady;
   const tid = uid("t");
+  let code = null;
+  if(ssLockOn && STORE.mode === "online"){ code = await askNewCode(); if(!code) return; toast("⏳"); }
   try{
-    const id = await STORE.create(name, {v:1, order:[tid], teams:{[tid]:{id:tid, name:"", rally:300, players:[]}}});
+    const id = await STORE.create(name, {v:1, order:[tid], teams:{[tid]:{id:tid, name:"", rally:300, players:[]}}}, code);
+    ssLockOn = false; await new Promise(r=>setTimeout(r, 150));
     ssName.value = ""; openSession(id);
   }catch(e){ console.error(e); toast("⚠️ " + (e && e.code || e)); }
 }
@@ -2021,12 +2108,19 @@ document.getElementById("ssNew").addEventListener("submit", e=>{
   e.preventDefault(); const name = ssName.value.trim().slice(0,40);
   if(!name){ ssName.focus(); return; } createSession(name);
 });
+document.getElementById("ssLockT").addEventListener("click", ()=>{ ssLockOn = !ssLockOn; renderSessions(); ssName.focus(); });
 ssList.addEventListener("click", async e=>{
   const o = e.target.closest("[data-open]"); if(o){ openSession(o.dataset.open); return; }
+  const lb = e.target.closest("[data-lock]");
+  if(lb){ const id = lb.dataset.lock, m = metaCache[id] || {};
+    if(!m.lock){ const code = await askNewCode(); if(!code) return; toast("⏳"); try{ await STORE.lockSess(id, code); toast("🔒 " + t("sessLockedOk")); }catch(err){ console.error(err); toast("⚠️ " + (err && err.code || err)); } return; }
+    const k = await sessKey(id); if(!k) return;
+    if(await ask(`${t("sessUnlockQ")}\n\n“${m.name || ""}”`, null, "confirm")){ try{ await STORE.unlockSess(id); toast("🔓 " + t("sessUnlockedOk")); }catch(err){ console.error(err); toast("⚠️ " + (err && err.code || err)); } }
+    return; }
   const r = e.target.closest("[data-ren]");
   if(r){ const id = r.dataset.ren, v = await ask(t("sessRen"), (metaCache[id]||{}).name || ""); if(v && v.trim()) STORE.rename(id, v.trim().slice(0,40)); return; }
   const dl = e.target.closest("[data-del]");
-  if(dl){ const id = dl.dataset.del; if(await ask(`${t("sessDel")}\n\n“${(metaCache[id]||{}).name || ""}”`, null, "confirm")) STORE.remove(id); return; }
+  if(dl){ const id = dl.dataset.del; if(metaCache[id] && metaCache[id].lock && !await sessKey(id)) return; if(await ask(`${t("sessDel")}\n\n“${(metaCache[id]||{}).name || ""}”`, null, "confirm")) STORE.remove(id); return; }
   const ln = e.target.closest("[data-link]");
   if(ln){ const url = location.href.split("#")[0] + "#s=" + ln.dataset.link;
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(()=>toast(t("linkCopied")), ()=>ask("🔗", url, "text")); }
@@ -2075,7 +2169,7 @@ function adminUnlock(){   // asks the 752 ADMIN code once (then remembered 30 da
   })().finally(()=>{ admBusy = null; });
   return admBusy;
 }
-function adminLock(){ admMem = null; sSet(localStorage, ADM_KEY, null); sSet(localStorage, "rallysync.moved", null); location.hash = ""; location.reload(); }
+function adminLock(){ admMem = null; sSet(localStorage, ADM_KEY, null); sSet(localStorage, "rallysync.super", null); sSet(localStorage, "rallysync.sk", null); sSet(localStorage, "rallysync.moved", null); location.hash = ""; location.reload(); }
 // once per device: bring the data kept at the old places (before 752 ADMIN) to the new secret place
 const OLD_PLAN_KEY = "7072ea7ab4394930930f322289f3a854dbcd2fc7c3f3018332a40f068eaae672";
 const OLD_BR_CFG = {apiKey:"AIzaSyCecwHJgRcuvNrZBOjXja3swFMLZtd06f0", authDomain:"kingshot-kvk.firebaseapp.com", databaseURL:"https://kingshot-kvk-default-rtdb.firebaseio.com", projectId:"kingshot-kvk", storageBucket:"kingshot-kvk.firebasestorage.app", messagingSenderId:"762489973337", appId:"1:762489973337:web:1a4aa206302f9a88bc5f48"};
@@ -2120,7 +2214,16 @@ function bkCount(d){   // what a backup holds, in words
   return [`⚔️ ${n((d.rs || {}).meta)} ${t("bkSess")}`, `🗺️ ${n((d.kvk || {}).index)} ${t("bkMaps")}`, `🛡️ ${n((d.br || {}).pool)} ${t("bkPlayers")}`].join(" · ");
 }
 const bkEmpty = d=>!d || BK_PARTS.every(k=>!d[k]);
-async function bkRead(key){ return await onceRaw(STORE.raw, "a/" + key); }
+async function bkRead(key){
+  const d = await onceRaw(STORE.raw, "a/" + key);
+  const meta = d && d.rs && d.rs.meta;
+  if(meta){ const ps = {};   // protected sessions: kept with their key (in the file / on this device only, never in the shared data)
+    for(const [id, m] of Object.entries(meta)){ if(!m || !m.lock) continue; const k = skGet(id) || await supOpen(m); if(!k) continue;
+      const v = await onceRaw(STORE.raw, `p/${k}/s`); if(v) ps[id] = {k, s:v}; }
+    if(Object.keys(ps).length) d.ps = ps; }
+  return d;
+}
+const bkPack = d=>Object.assign(Object.fromEntries(BK_PARTS.map(k=>[k, (d || {})[k] || null])), d && d.ps ? {ps:d.ps} : {});
 function bkList(){ try{ const l = JSON.parse(localStorage.getItem(BK_KEY) || "[]"); return Array.isArray(l) ? l.filter(x=>x && x.d && x.data) : []; }catch(e){ return []; } }
 function bkSave(list){
   while(list.length){ try{ localStorage.setItem(BK_KEY, JSON.stringify(list)); return true; }catch(e){ list.pop(); } }   // too big for this browser: keep fewer copies
@@ -2131,7 +2234,7 @@ async function bkAuto(key){   // one automatic copy per day on this device (an e
     if(!STORE || STORE.mode !== "online" || !STORE.raw) return;
     const day = new Date().toISOString().slice(0, 10), list = bkList();
     const data = await bkRead(key); if(bkEmpty(data)) return;
-    const copy = {d:day, t:Date.now(), data:Object.fromEntries(BK_PARTS.map(k=>[k, data[k] || null]))};
+    const copy = {d:day, t:Date.now(), data:bkPack(data)};
     const i = list.findIndex(x=>x.d === day);
     if(i >= 0){   // today's copy is refreshed, unless a part that was there has disappeared (then it is kept as it was)
       if(BK_PARTS.some(k=>list[i].data[k] && !copy.data[k])) return;
@@ -2148,8 +2251,9 @@ function bkDownload(data){
 }
 async function bkRestore(key, data, parts){   // a copy of what is there now is downloaded first, then the chosen parts are put back
   const now = await bkRead(key);
-  if(!bkEmpty(now)) bkDownload(Object.fromEntries(BK_PARTS.map(k=>[k, (now || {})[k] || null])));
+  if(!bkEmpty(now)) bkDownload(bkPack(now));
   const u = {}; parts.forEach(k=>{ u[`a/${key}/${k}`] = data[k] || null; });
+  if(parts.includes("rs") && data.ps) for(const id in data.ps){ const x = data.ps[id]; if(x && /^[0-9a-f]{64}$/.test(x.k)){ u[`p/${x.k}/s`] = x.s || null; skSet(id, x.k); } }
   await STORE.raw.update(u);
 }
 function bkOpen(){
@@ -2168,7 +2272,7 @@ function bkOpen(){
   box.querySelector("#bkX").onclick = close;
   let current = null;
   bkRead(key).then(d=>{ current = d; const el = box.querySelector("#bkNow"); if(el) el.textContent = bkEmpty(d) ? "⚠️ " + t("bkEmptyNow") : bkCount(d); });
-  box.querySelector("#bkDl").onclick = async ()=>{ const d = current || await bkRead(key); if(bkEmpty(d)){ toast("⚠️ " + t("bkEmptyNow")); return; } bkDownload(Object.fromEntries(BK_PARTS.map(k=>[k, d[k] || null]))); toast("✔ " + t("bkDone")); };
+  box.querySelector("#bkDl").onclick = async ()=>{ const d = current || await bkRead(key); if(bkEmpty(d)){ toast("⚠️ " + t("bkEmptyNow")); return; } bkDownload(bkPack(d)); toast("✔ " + t("bkDone")); };
   box.querySelector("#bkUp").onclick = ()=>box.querySelector("#bkFile").click();
   box.querySelector("#bkFile").onchange = async e=>{
     const f = e.target.files && e.target.files[0]; e.target.value = ""; if(!f) return;
@@ -2216,7 +2320,7 @@ function hubView(v){
   if(adm && !admGet()){ hubView("main"); return; }   // the admin list needs the code
   if(adm){   // the last tool used + until when this device stays open
     const a = admGet();
-    document.querySelector("#hubAdminBox .hub-note").textContent = "🔓 " + t("hubAdmUntil").replace("{d}", new Date(a.until).toLocaleDateString(S.lang));
+    document.querySelector("#hubAdminBox .hub-note").textContent = "🔓 " + t("hubAdmUntil").replace("{d}", new Date(a.until).toLocaleDateString(S.lang)) + (supOn() ? " · 👑 " + t("superOn") : "");
     const last = sGet(localStorage, LAST_KEY);
     document.querySelectorAll("#hubAdminBox .hb-last").forEach(e=>e.remove());
     const lb = last && document.getElementById({rally:"hubRally", plan:"hubPlan", roster:"hubRoster"}[last]);
